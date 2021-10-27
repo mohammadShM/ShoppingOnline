@@ -5,6 +5,7 @@
 namespace App\Http\Controllers\AdminController;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AdminRequest\CategoryCreateRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -22,10 +23,10 @@ class CategoryController extends Controller
         return view('admin.categories.index', compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(CategoryCreateRequest $request)
     {
         Category::query()->create([
-            "category_id" => $request->get('category_id'),
+            "parent_id" => $request->get('parent_id'),
             "title_fa" => $request->get('title_fa'),
             "title_en" => $request->get('title_en'),
         ]);
@@ -37,18 +38,25 @@ class CategoryController extends Controller
 
     }
 
-    public function edit($id)
+    public function edit(Category $category)
     {
-
+        $categories = Category::all();
+        return view('admin.categories.edit', compact('category', 'categories'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-
+        $category->update([
+            "parent_id" => $request->get('parent_id'),
+            "title_fa" => $request->get('title_fa'),
+            "title_en" => $request->get('title_en'),
+        ]);
+        return redirect(route('category.create'));
     }
 
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-
+        $category->delete();
+        return back();
     }
 }

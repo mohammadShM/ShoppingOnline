@@ -16,7 +16,12 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             // constrained for refrence one in relationsheep in database ==========================
-            $table->foreignId('category_id')->nullable()->constrained();
+            // best for many to many ==========================
+            // $table->foreignId('category_id')->nullable()->constrained();
+            // best for one to many ==========================
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->foreign('parent_id')->on('categories')->references('id')
+                ->onDelete('cascade')->onUpdate('cascade');
             $table->string('title_fa')->unique();
             $table->string('title_en')->nullable()->unique();
             $table->timestamps();
