@@ -6,8 +6,8 @@ namespace App\Http\Controllers\AdminController;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminRequest\CategoryCreateRequest;
+use App\Http\Requests\AdminRequest\CategoryUpdateRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -19,8 +19,11 @@ class CategoryController extends Controller
 
     public function create()
     {
-        $categories = Category::all();
-        return view('admin.categories.index', compact('categories'));
+        // for category list
+        $categories = Category::paginate(10);
+        // for select category
+        $selectCategories = Category::all();
+        return view('admin.categories.index', compact('categories','selectCategories'));
     }
 
     public function store(CategoryCreateRequest $request)
@@ -44,7 +47,7 @@ class CategoryController extends Controller
         return view('admin.categories.edit', compact('category', 'categories'));
     }
 
-    public function update(Request $request, Category $category)
+    public function update(CategoryUpdateRequest $request, Category $category)
     {
         $category->update([
             "parent_id" => $request->get('parent_id'),
