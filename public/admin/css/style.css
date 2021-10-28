@@ -626,6 +626,10 @@ textarea {
     content: "\E0f7";
 }
 
+.sidebar__nav .i-brand a::before {
+    content: "\E05e";
+}
+
 .sidebar__nav .i-ads a::before {
     content: "\E00b";
 }
@@ -1920,10 +1924,19 @@ span.tagRemove:hover {
     margin-top: 15px;
 }
 
+.margin-top-5 {
+    margin-top: 5px;
+}
+
 .text-danger {
     color: #7c1212;
 }
 
-.button-cursor{
+.button-cursor {
     cursor: pointer;
+}
+
+.label_custom {
+    display: block;
+    width: 100%;
 }
