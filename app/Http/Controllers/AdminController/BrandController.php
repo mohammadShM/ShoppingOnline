@@ -6,8 +6,9 @@ namespace App\Http\Controllers\AdminController;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminRequest\BrandCreateRequest;
+use App\Http\Requests\AdminRequest\BrandUpdateRequest;
 use App\Models\Brand;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BrandController extends Controller
 {
@@ -35,7 +36,7 @@ class BrandController extends Controller
             "name" => $request->get('name'),
             "image" => $path,
         ]);
-        return back()->with('success','برند با موفقیت افزوده شد');
+        return back()->with('success', 'برند با موفقیت افزوده شد');
     }
 
     public function show($id)
@@ -43,18 +44,38 @@ class BrandController extends Controller
 
     }
 
-    public function edit($id)
+    public function edit(Brand $brand)
     {
-
+        return view('admin.brands.edit', compact('brand'));
     }
 
-    public function update(Request $request, $id)
+    /** @noinspection PhpUnhandledExceptionInspection
+     * @noinspection NullPointerExceptionInspection
+     */
+    public function update(BrandUpdateRequest $request, Brand $brand)
     {
-
+        $path = $brand->image;
+        if ($request->hasFile('image')) {
+            if (Storage::exists($path)) {
+                // remove image in storage directory
+                Storage::delete($path);
+            }
+            $pathName = "BRAND_" . time() . "_" . random_int(111111, 999999) . "_"
+                . $request->file('image')->getClientOriginalName();
+            $path = $request->file('image')->storeAs('public/image-brands', $pathName);
+        }
+        $brand->update([
+            "name" => $request->get('name'),
+            "image" => $path,
+        ]);
+        return redirect(route('brand.create'));
     }
 
-    public function destroy($id)
+    public function destroy(Brand $brand)
     {
-
+        // remove image in public directory
+        unlink(str_replace('public', 'storage', $brand->image));
+        $brand->delete();
+        return back();
     }
 }

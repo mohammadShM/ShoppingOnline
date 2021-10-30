@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static paginate(int $int)
+ * @property mixed $image
  */
 class Brand extends Model
 {

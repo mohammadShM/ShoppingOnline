@@ -9,7 +9,7 @@
         <input value="{{old('name')}}" name="name"
                type="text" placeholder="نام برند" class="text">
         <label class="label_custom margin-top-5" for="image">افزودن عکس</label>
-        <input type="file" class="form-control label_custom margin-top-5" name="image">
+        <input type="file" class="form-control label_custom margin-top-5 text" name="image">
         <button class="btn btn-brand margin-top-15">اضافه کردن</button>
     </form>
 </div>

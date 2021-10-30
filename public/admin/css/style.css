@@ -1940,3 +1940,8 @@ span.tagRemove:hover {
     display: block;
     width: 100%;
 }
+
+.textarea-me {
+    resize: none;
+    height: 200px;
+}

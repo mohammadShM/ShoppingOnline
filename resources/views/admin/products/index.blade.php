@@ -9,15 +9,18 @@
                         <thead role="rowgroup">
                         <tr role="row" class="title-row">
                             <th>شناسه</th>
-                            <th>نام برند</th>
-                            <th>عکس</th>
+                            <th>نام محصول</th>
+                            <th>تصویر محصول</th>
+                            <th>قیمت محصول</th>
+                            <th>دسته بندی محصول</th>
+                            <th>برند محصول</th>
                             <th>مشاهده</th>
                             <th>ویرایش</th>
                             <th>حذف</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($brands as $item)
+                        @foreach ($products as $item)
                             <tr role="row" class="">
                                 <td><a href="">{{$item->id}}</a></td>
                                 <td><a href="">{{$item->name}}</a></td>
@@ -30,14 +33,21 @@
                                             width="50" height="50"/>
                                     </a>
                                 </td>
+                                <td><a href="">{{number_format($item->price)}}</a></td>
+                                <td>
+                                    <a href="">{{$item->category->title_fa}}</a>
+                                </td>
+                                <td>
+                                    <a href="">{{$item->brand->name}}</a>
+                                </td>
                                 <td>
                                     <a href="" target="_blank" class="item-eye" title="مشاهده"></a>
                                 </td>
                                 <td>
-                                    <a href="{{route('brand.edit',$item->id)}}" class="item-edit" title="ویرایش"></a>
+                                    <a href="{{route('product.edit',$item->id)}}" class="item-edit" title="ویرایش"></a>
                                 </td>
                                 <td>
-                                    <form action="{{route('brand.destroy',$item->id)}}" method="post">
+                                    <form action="{{route('product.destroy',$item->id)}}" method="post">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="item-delete bg-white button-cursor" title="حذف"></button>
@@ -48,9 +58,9 @@
                         </tbody>
                     </table>
                 </div>
-                {{$brands->links()}}
+                {{$products->links()}}
             </div>
-            @include('admin.brands.create')
+            @include('admin.products.create')
         </div>
     </div>
 @endsection

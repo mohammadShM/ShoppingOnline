@@ -15,7 +15,8 @@
             <a href="{{route('category.create')}}">دسته بندی ها</a></li>
         <li class="item-li i-brand {{ request()->is('adminPanel/brand/create') ? 'is-active' : '' }}">
             <a href="{{route('brand.create')}}">برند ها</a></li>
-        {{-- <li class="item-li i-courses "><a href="#">دوره ها</a></li> --}}
+        <li class="item-li i-courses {{ request()->is('adminPanel/product/create') ? 'is-active' : '' }}">
+            <a href="{{route('product.create')}}">محصولات</a></li>
         {{-- <li class="item-li i-users"><a href="#"> کاربران</a></li> --}}
         {{-- <li class="item-li i-slideshow"><a href="#">اسلایدشو</a></li> --}}
         {{-- <li class="item-li i-banners"><a href="#">بنر ها</a></li> --}}
