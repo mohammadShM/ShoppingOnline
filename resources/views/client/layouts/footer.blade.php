@@ -147,6 +147,6 @@
 <script type="text/javascript" src="{{asset('./client/js/owl.carousel.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('./client/js/custom.js')}}"></script>
 <!-- JS Part End-->
-
+@yield('js-links')
 </body>
 </html>

@@ -2,27 +2,28 @@
 
 namespace App\Providers;
 
+use App\Models\Brand;
+use App\Models\Category;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
+
+    public function register(): void
     {
-        //
+
     }
 
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
+    public function boot(): void
     {
-        //
+        // set gloabal data for header menu in client pages in index home and single product page
+        view()->composer(['client.index', 'client.products.show'], function ($view) {
+            $categories = Category::query()->where('parent_id', null)->get();
+            $brands = Brand::all();
+            $view->with([
+                'categories' => $categories,
+                'brands' => $brands,
+            ]);
+        });
     }
 }

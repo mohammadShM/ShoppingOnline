@@ -12,15 +12,16 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             // for one to many
-            $table->foreignId("category_id")->constrained();
+            $table->foreignId("category_id")->constrained()->onDelete('cascade')->onUpdate('cascade');
             // for one to many
-            $table->foreignId("brand_id")->constrained();
+            $table->foreignId("brand_id")->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string("name");
             $table->string("slug")->unique();
             $table->integer("price");
             // for galery image
             $table->text("image");
             $table->text("description");
+            $table->softDeletes();
             $table->timestamps();
         });
     }

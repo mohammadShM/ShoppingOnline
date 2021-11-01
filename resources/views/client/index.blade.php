@@ -3,9 +3,9 @@
     <div id="container">
         <div class="container">
             <div class="row">
-                <!--Middle Part Start-->
+                <!-- ======================= Middle Part Start ======================= -->
                 <div id="content" class="col-xs-12">
-                    <!-- Slideshow Start-->
+                    <!-- ======================= Slideshow Start ======================= -->
                     <div class="slideshow single-slider owl-carousel">
                         <div class="item"><a href="#"><img class="img-responsive"
                                                            src="{{asset('./client/image/slider/banner-2.jpg')}}"
@@ -16,8 +16,8 @@
                                                            alt="banner 1"/></a>
                         </div>
                     </div>
-                    <!-- Slideshow End-->
-                    <!-- Banner Start-->
+                    <!-- ======================= Slideshow End ======================= -->
+                    <!-- ======================= Banner Start ======================= -->
                     <div class="marketshop-banner">
                         <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"><a href="#"><img
@@ -38,8 +38,8 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Banner End-->
-                    <!-- محصولات Tab Start -->
+                    <!-- ======================= Banner End ======================= -->
+                    <!--======================= محصولات Tab Start   ======================= -->
                     <div id="product-tab" class="product-tab">
                         <ul id="tabs" class="tabs">
                             <li><a href="#tab-featured">ویژه</a></li>
@@ -561,8 +561,9 @@
                             </div>
 
                         </div>
-                    </div>    <!-- محصولات Tab Start -->
-                    <!-- Banner Start -->
+                    </div>
+                    <!--======================= محصولات Tab Start   ======================= -->
+                    <!--  ======================= Banner Start  ======================= -->
                     <div class="marketshop-banner">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><a href="#"><img
@@ -574,8 +575,8 @@
                                         title="2 Block Banner 1"/></a></div>
                         </div>
                     </div>
-                    <!-- Banner End -->
-                    <!-- دسته ها محصولات Slider Start-->
+                    <!-- ======================= Banner End  ======================= -->
+                    <!--======================= دسته ها محصولات Slider Start  ======================= -->
                     <div class="category-module" id="latest_category">
                         <h3 class="subtitle">مد و زیبایی - <a class="viewall" href="#">نمایش همه</a></h3>
                         <div class="category-module-content">
@@ -1183,209 +1184,62 @@
                             </div>
                         </div>
                     </div>
-                    <!-- دسته ها محصولات Slider End-->
+                    <!--======================= دسته ها محصولات Slider End  ======================= -->
 
-                    <!-- دسته ها محصولات Slider Start -->
-                    <h3 class="subtitle">البسه - <a class="viewall" href="#">نمایش همه</a></h3>
-                    <div class="owl-carousel latest_category_carousel">
-                        <div class="product-thumb">
-                            <div class="image"><a href="#"><img
-                                        src="{{asset('./client/image/product/iphone_6-220x330.jpg')}}"
-                                        alt="کرم مو آقایان" title="کرم مو آقایان"
-                                        class="img-responsive"/></a></div>
-                            <div class="caption">
-                                <h4><a href="#">کرم مو آقایان</a></h4>
-                                <p class="price"> 42300 تومان </p>
-                                <div class="rating"><span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                            class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i
-                                            class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                            class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i
-                                            class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                            class="fa fa-star-o fa-stack-2x"></i></span></div>
-                            </div>
-                            <div class="button-group">
-                                <button class="btn-primary" type="button" onClick=""><span>افزودن به سبد</span></button>
-                                <div class="add-to-links">
-                                    <button type="button" data-toggle="tooltip" title="افزودن به علاقه مندی" onClick=""><i
-                                            class="fa fa-heart"></i></button>
-                                    <button type="button" data-toggle="tooltip" title="افزودن به مقایسه" onClick=""><i
-                                            class="fa fa-exchange"></i></button>
+                    <!--======================= دسته ها محصولات Slider Start   ======================= -->
+                    @foreach ($categories as $parentCategory)
+                        <h3 class="subtitle"> {{$parentCategory->title_fa}} <a class="viewall" href="#">نمایش همه</a></h3>
+                        <div class="owl-carousel latest_category_carousel">
+                            @forelse ($parentCategory->getAllSubCategoryProducts() as $product)
+                                <div class="product-thumb">
+                                    <div class="image"><a href="{{route('productDetails.show',$product->id)}}"><img
+                                                src="{{str_replace('public','storage',$product->image)}}"
+                                                alt="{{$product->name}}" title="{{$product->name}}"
+                                                class="img-responsive"/></a></div>
+                                    <div class="caption">
+                                        <h4><a href="{{route('productDetails.show',$product->id)}}">
+                                                {{$product->name}}</a></h4>
+                                        <p class="price"> {{$product->price}} تومان </p>
+                                        <div class="rating"><span class="fa fa-stack"><i class="fa fa-star fa-stack-2x">
+                                                </i><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i>
+                                                <i class="fa fa-star-o fa-stack-2x"></i></span>
+                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
+                                                    class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack">
+                                                <i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i>
+                                            </span>
+                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
+                                                    class="fa fa-star-o fa-stack-2x"></i></span></div>
+                                    </div>
+                                    <div class="button-group">
+                                        <button class="btn-primary" type="button" onClick=""><span>افزودن به سبد</span></button>
+                                        <div class="add-to-links">
+                                            <button type="button" data-toggle="tooltip" title="افزودن به علاقه مندی" onClick="">
+                                                <i class="fa fa-heart"></i></button>
+                                            <button type="button" data-toggle="tooltip" title="افزودن به مقایسه" onClick="">
+                                                <i class="fa fa-exchange"></i></button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            @empty
+                                <p class="p-custom-in-home-page">متاسفانه در حال حاضر در این دسته بندی محصولی وجود ندارد</p>
+                            @endforelse
                         </div>
-                        <div class="product-thumb">
-                            <div class="image"><a href="#"><img
-                                        src="{{asset('./client/image/product/nikon_d300_5-220x330.jpg')}}"
-                                        alt="محصولات مراقبت از مو" title="محصولات مراقبت از مو"
-                                        class="img-responsive"/></a></div>
-                            <div class="caption">
-                                <h4><a href="#">محصولات مراقبت از مو</a></h4>
-                                <p class="price"><span class="price-new">66000 تومان</span> <span
-                                        class="price-old">90000 تومان</span> <span class="saving">-27%</span></p>
-                                <div class="rating"><span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                            class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i
-                                            class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i
-                                            class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i
-                                            class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i
-                                            class="fa fa-star-o fa-stack-2x"></i></span></div>
-                            </div>
-                            <div class="button-group">
-                                <button class="btn-primary" type="button" onClick=""><span>افزودن به سبد</span></button>
-                                <div class="add-to-links">
-                                    <button type="button" data-toggle="tooltip" title="افزودن به علاقه مندی" onClick=""><i
-                                            class="fa fa-heart"></i></button>
-                                    <button type="button" data-toggle="tooltip" title="افزودن به مقایسه" onClick=""><i
-                                            class="fa fa-exchange"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-thumb">
-                            <div class="image"><a href="#"><img
-                                        src="{{asset('./client/image/product/nikon_d300_4-220x330.jpg')}}"
-                                        alt="کرم لخت کننده مو" title="کرم لخت کننده مو"
-                                        class="img-responsive"/></a></div>
-                            <div class="caption">
-                                <h4><a href="#">کرم لخت کننده مو</a></h4>
-                                <p class="price"> 88000 تومان </p>
-                            </div>
-                            <div class="button-group">
-                                <button class="btn-primary" type="button" onClick=""><span>افزودن به سبد</span></button>
-                                <div class="add-to-links">
-                                    <button type="button" data-toggle="tooltip" title="افزودن به علاقه مندی" onClick=""><i
-                                            class="fa fa-heart"></i></button>
-                                    <button type="button" data-toggle="tooltip" title="افزودن به مقایسه" onClick=""><i
-                                            class="fa fa-exchange"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-thumb">
-                            <div class="image"><a href=""><img src="{{asset('./client/image/product/macbook_5-220x330.jpg')}}"
-                                                               alt="ژل حمام بانوان"
-                                                               title="ژل حمام بانوان" class="img-responsive"/></a></div>
-                            <div class="caption">
-                                <h4><a href="#">ژل حمام بانوان</a></h4>
-                                <p class="price"><span class="price-new">19500 تومان</span> <span
-                                        class="price-old">21900 تومان</span> <span class="saving">-4%</span></p>
-                            </div>
-                            <div class="button-group">
-                                <button class="btn-primary" type="button" onClick="cart.add('61');"><span>افزودن به سبد</span>
-                                </button>
-                                <div class="add-to-links">
-                                    <button type="button" data-toggle="tooltip" title="افزودن به علاقه مندی"
-                                            onClick="wishlist.add('61');"><i class="fa fa-heart"></i></button>
-                                    <button type="button" data-toggle="tooltip" title="افزودن به مقایسه"
-                                            onClick="compare.add('61');"><i class="fa fa-exchange"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-thumb">
-                            <div class="image"><a href="#"><img
-                                        src="{{asset('./client/image/product/macbook_4-220x330.jpg')}}"
-                                        alt="عطر گوچی" title="عطر گوچی"
-                                        class="img-responsive"/></a></div>
-                            <div class="caption">
-                                <h4><a href="#">عطر گوچی</a></h4>
-                                <p class="price"> 85000 تومان </p>
-                                <div class="rating"><span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                            class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i
-                                            class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                            class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i
-                                            class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                            class="fa fa-star-o fa-stack-2x"></i></span></div>
-                            </div>
-                            <div class="button-group">
-                                <button class="btn-primary" type="button" onClick=""><span>افزودن به سبد</span></button>
-                                <div class="add-to-links">
-                                    <button type="button" data-toggle="tooltip" title="افزودن به علاقه مندی" onClick=""><i
-                                            class="fa fa-heart"></i></button>
-                                    <button type="button" data-toggle="tooltip" title="افزودن به مقایسه" onClick=""><i
-                                            class="fa fa-exchange"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-thumb">
-                            <div class="image"><a href="#"><img
-                                        src="{{asset('./client/image/product/macbook_3-220x330.jpg')}}"
-                                        alt="رژ لب گارنیر" title="رژ لب گارنیر"
-                                        class="img-responsive"/></a></div>
-                            <div class="caption">
-                                <h4><a href="#">رژ لب گارنیر</a></h4>
-                                <p class="price"> 123000 تومان </p>
-                            </div>
-                            <div class="button-group">
-                                <button class="btn-primary" type="button" onClick=""><span>افزودن به سبد</span></button>
-                                <div class="add-to-links">
-                                    <button type="button" data-toggle="tooltip" title="افزودن به علاقه مندی" onClick=""><i
-                                            class="fa fa-heart"></i></button>
-                                    <button type="button" data-toggle="tooltip" title="افزودن به مقایسه" onClick=""><i
-                                            class="fa fa-exchange"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-thumb">
-                            <div class="image"><a href="#"><img
-                                        src="{{asset('./client/image/product/macbook_2-220x330.jpg')}}"
-                                        alt="عطر نینا ریچی" title="عطر نینا ریچی"
-                                        class="img-responsive"/></a></div>
-                            <div class="caption">
-                                <h4><a href="#">عطر نینا ریچی</a></h4>
-                                <p class="price"> 110000 تومان </p>
-                            </div>
-                            <div class="button-group">
-                                <button class="btn-primary" type="button" onClick=""><span>افزودن به سبد</span></button>
-                                <div class="add-to-links">
-                                    <button type="button" data-toggle="tooltip" title="افزودن به علاقه مندی" onClick=""><i
-                                            class="fa fa-heart"></i></button>
-                                    <button type="button" data-toggle="tooltip" title="افزودن به مقایسه" onClick=""><i
-                                            class="fa fa-exchange"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- دسته ها محصولات Slider End -->
+                @endforeach
+                <!--======================= دسته ها محصولات Slider End   ======================= -->
 
-                    <!-- برند Logo Carousel Start-->
+                    <!--======================= برند Logo Carousel Start  ======================= -->
                     <div id="carousel" class="owl-carousel nxt">
-                        <div class="item text-center"><a href="#"><img
-                                    src="{{asset('./client/image/product/apple_logo-100x100.jpg')}}"
-                                    alt="پالم"
-                                    class="img-responsive"/></a></div>
-                        <div class="item text-center"><a href="#"><img
-                                    src="{{asset('./client/image/product/canon_logo-100x100.jpg')}}"
-                                    alt="سونی"
-                                    class="img-responsive"/></a></div>
-                        <div class="item text-center"><a href="#"><img
-                                    src="{{asset('./client/image/product/apple_logo-100x100.jpg')}}"
-                                    alt="کنون"
-                                    class="img-responsive"/></a></div>
-                        <div class="item text-center"><a href="#"><img
-                                    src="{{asset('./client/image/product/canon_logo-100x100.jpg')}}"
-                                    alt="اپل"
-                                    class="img-responsive"/></a></div>
-                        <div class="item text-center"><a href="#"><img
-                                    src="{{asset('./client/image/product/apple_logo-100x100.jpg')}}"
-                                    alt="اچ تی سی"
-                                    class="img-responsive"/></a></div>
-                        <div class="item text-center"><a href="#"><img
-                                    src="{{asset('./client/image/product/canon_logo-100x100.jpg')}}"
-                                    alt="اچ پی"
-                                    class="img-responsive"/></a></div>
-                        <div class="item text-center"><a href="#"><img
-                                    src="{{asset('./client/image/product/apple_logo-100x100.jpg')}}"
-                                    alt="brand"
-                                    class="img-responsive"/></a></div>
-                        <div class="item text-center"><a href="#"><img
-                                    src="{{asset('./client/image/product/canon_logo-100x100.jpg')}}"
-                                    alt="brand1"
-                                    class="img-responsive"/></a></div>
+                        @foreach ($brands as $brand)
+                            <div class="item text-center"><a href="#"><img
+                                        src="{{str_replace('public','storage',$brand->image)}}"
+                                        alt="{{$brand->name}}" width="80" height="80"
+                                        class="img-responsive"/></a></div>
+                        @endforeach
                     </div>
-                    <!-- برند Logo Carousel End -->
+                    <!--======================= برند Logo Carousel End   ======================= -->
                 </div>
-                <!--Middle Part End-->
+                <!--======================= Middle Part End ======================= -->
             </div>
         </div>
     </div>

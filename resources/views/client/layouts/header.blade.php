@@ -19,7 +19,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('./client/css/stylesheet-rtl.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('./client/css/responsive-rtl.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('./client/css/stylesheet-skin2.css')}}"/>
-
+    @yield('css-links')
     <!-- CSS Part End-->
 </head>
 <body>

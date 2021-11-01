@@ -14,16 +14,16 @@
                     @method('patch')
                     <input value="{{$product->name}}" name="name"
                            type="text" placeholder="نام محصول" class="text">
-                    <label class="label_custom margin-top-5" for="category_id">ویرایش دسته بندی محصول :</label>
-                    <select name="category_id" id="category_id">
+                    <label class="label_custom margin-top-5" for="category">ویرایش دسته بندی محصول :</label>
+                    <select name="category_id" id="category">
                         <option value disabled selected>انتخاب کنید</option>
                         @foreach($categories as $category)
                             <option @if($category->id === $product->category_id) selected @endif
                                     value="{{$category->id}}">{{$category->title_fa}}</option>
                         @endforeach
                     </select>
-                    <label class="label_custom margin-top-5" for="brand_id">ویرایش برند محصول :</label>
-                    <select name="brand_id" id="brand_id">
+                    <label class="label_custom margin-top-5" for="brand">ویرایش برند محصول :</label>
+                    <select name="brand_id" id="brand">
                         <option value disabled selected>انتخاب کنید</option>
                         @foreach($brands as $brand)
                             <option @if($brand->id === $product->brand_id) selected @endif

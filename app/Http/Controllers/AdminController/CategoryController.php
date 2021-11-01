@@ -49,6 +49,11 @@ class CategoryController extends Controller
 
     public function update(CategoryUpdateRequest $request, Category $category)
     {
+        $categoryUnique = Category::query()->where('title_fa', '=', $request->get('title_fa'))
+            ->where('id', '!=', $category->id)->exists();
+        if ($categoryUnique) {
+            return back()->withErrors(['عنوان فارسی دسته بندی تکراری است']);
+        }
         $category->update([
             "parent_id" => $request->get('parent_id'),
             "title_fa" => $request->get('title_fa'),

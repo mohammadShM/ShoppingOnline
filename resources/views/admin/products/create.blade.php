@@ -8,15 +8,15 @@
         @csrf
         <input value="{{old('name')}}" name="name"
                type="text" placeholder="نام محصول" class="text">
-        <label class="label_custom margin-top-5" for="category_id">افزودن دسته بندی محصول :</label>
-        <select name="category_id" id="category_id">
+        <label class="label_custom margin-top-5" for="category">افزودن دسته بندی محصول :</label>
+        <select name="category_id" id="category">
             <option value disabled selected>انتخاب کنید</option>
             @foreach($categories as $category)
                 <option value="{{$category->id}}">{{$category->title_fa}}</option>
             @endforeach
         </select>
-        <label class="label_custom margin-top-5" for="brand_id">افزودن برند محصول :</label>
-        <select name="brand_id" id="brand_id">
+        <label class="label_custom margin-top-5" for="brand">افزودن برند محصول :</label>
+        <select name="brand_id" id="brand">
             <option value disabled selected>انتخاب کنید</option>
             @foreach($brands as $brand)
                 <option value="{{$brand->id}}">{{$brand->name}}</option>

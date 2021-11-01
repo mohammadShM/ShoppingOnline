@@ -22,7 +22,8 @@ class ProductController extends Controller
 
     public function create()
     {
-        $products = Product::paginate(5);
+        // $products = Product::withTrashed()->paginate(5);
+        $products = Product::withoutTrashed()->paginate(5);
         $categories = Category::all();
         $brands = Brand::all();
         return view('admin.products.index', [
@@ -103,7 +104,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         // remove image in public directory
-        unlink(str_replace('public', 'storage', $product->image));
+        // unlink(str_replace('public', 'storage', $product->image));
         $product->delete();
         return back();
     }

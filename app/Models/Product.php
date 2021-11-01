@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @method static paginate(int $int)
@@ -16,7 +17,11 @@ class Product extends Model
 {
     use HasFactory;
 
+    use SoftDeletes;
+
     protected $guarded = ['id'];
+
+    protected $dates = ['deleted_at'];
 
     public function category(): BelongsTo
     {
