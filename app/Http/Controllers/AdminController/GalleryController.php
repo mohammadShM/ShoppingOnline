@@ -5,6 +5,8 @@
 namespace App\Http\Controllers\AdminController;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AdminRequest\ProductGalleryRequest;
+use App\Models\Gallery;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -23,9 +25,9 @@ class GalleryController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function store(ProductGalleryRequest $request, Product $product)
     {
-
+        $product->addGallery($request);
     }
 
     public function show(Product $product)
@@ -43,8 +45,9 @@ class GalleryController extends Controller
 
     }
 
-    public function destroy(Product $product)
+    public function destroy(Product $product, Gallery $gallery)
     {
-
+        $product->deleteGallery($gallery);
+        return back();
     }
 }

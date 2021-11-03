@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController\BrandController;
 use App\Http\Controllers\AdminController\CategoryController;
+use App\Http\Controllers\AdminController\DiscountController;
 use App\Http\Controllers\AdminController\GalleryController;
 use App\Http\Controllers\AdminController\PanelController;
 use App\Http\Controllers\AdminController\ProductController as ProductControllerAdmin;
@@ -18,8 +19,9 @@ Route::prefix('')->group(function () {
 // admin =============================================================
 Route::prefix('adminPanel')->group(function () {
     Route::resource('/', PanelController::class);
-    Route::resource('/category', CategoryController::class);
-    Route::resource('/brand', BrandController::class);
-    Route::resource('/product', ProductControllerAdmin::class);
-    Route::resource('/product.gallery', GalleryController::class);
+    Route::resource('category', CategoryController::class);
+    Route::resource('brand', BrandController::class);
+    Route::resource('product', ProductControllerAdmin::class);
+    Route::resource('product.gallery', GalleryController::class);
+    Route::resource('product.discount', DiscountController::class);
 });

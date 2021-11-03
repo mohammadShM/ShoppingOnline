@@ -1,7 +1,6 @@
 @extends('client.layouts.app')
 @section('css-links')
-    <link rel="stylesheet" type="text/css" href="{{asset('./client/css/owl.transitions.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{asset('./client/js/swipebox/src/css/swipebox.min.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('./client/js/swipebox/src/css/swipebox.min.css')}}"/>
 @endsection
 @section('content')
     <div id="container">
@@ -23,35 +22,38 @@
                         <h1 class="title" itemprop="name">{{$product->name}}</h1>
                         <div class="row product-info">
                             <div class="col-sm-6">
-                                <div class="image"><img class="img-responsive" itemprop="image" id="zoom_01"
-                                                        src="{{str_replace('public', '/storage',$product->image)}}"
-                                                        title="لپ تاپ ایلین ور"
-                                                        alt="لپ تاپ ایلین ور"
-                                                        data-zoom-image="image/product/macbook_air_1-600x900.jpg"/></div>
+                                <div class="image">
+                                    <img class="img-responsive" itemprop="image" id="zoom_01"
+                                         src="{{str_replace('public', '/storage',$product->image)}}"
+                                         title="{{$product->name}}"
+                                         alt="{{$product->name}}"
+                                         data-zoom-image="{{str_replace('public', '/storage',$product->image)}}"/>
+                                </div>
                                 <div class="center-block text-center"><span class="zoom-gallery"><i class="fa fa-search">
                                         </i> برای مشاهده گالری روی تصویر کلیک کنید</span>
                                 </div>
-                                <div class="image-additional" id="gallery_01"><a class="thumbnail" href="#"
-                                                                                 data-zoom-image="image/product/macbook_air_1-600x900.jpg"
-                                                                                 data-image="image/product/macbook_air_1-350x525.jpg"
-                                                                                 title="لپ تاپ ایلین ور"> <img
-                                            src="image/product/macbook_air_1-66x99.jpg" title="لپ تاپ ایلین ور"
-                                            alt="لپ تاپ ایلین ور"/></a> <a class="thumbnail" href="#"
-                                                                           data-zoom-image="image/product/macbook_air_4-600x900.jpg"
-                                                                           data-image="image/product/macbook_air_4-350x525.jpg"
-                                                                           title="لپ تاپ ایلین ور"><img
-                                            src="image/product/macbook_air_4-66x99.jpg" title="لپ تاپ ایلین ور"
-                                            alt="لپ تاپ ایلین ور"/></a> <a class="thumbnail" href="#"
-                                                                           data-zoom-image="image/product/macbook_air_2-600x900.jpg"
-                                                                           data-image="image/product/macbook_air_2-350x525.jpg"
-                                                                           title="لپ تاپ ایلین ور"><img
-                                            src="image/product/macbook_air_2-66x99.jpg" title="لپ تاپ ایلین ور"
-                                            alt="لپ تاپ ایلین ور"/></a> <a class="thumbnail" href="#"
-                                                                           data-zoom-image="image/product/macbook_air_3-600x900.jpg"
-                                                                           data-image="image/product/macbook_air_3-350x525.jpg"
-                                                                           title="لپ تاپ ایلین ور"><img
-                                            src="image/product/macbook_air_3-66x99.jpg" title="لپ تاپ ایلین ور"
-                                            alt="لپ تاپ ایلین ور"/></a></div>
+                                <div class="image-additional" id="gallery_01">
+                                    <a class="thumbnail"
+                                       href="#"
+                                       data-zoom-image="{{str_replace('public', '/storage',$product->image)}}"
+                                       data-image="{{str_replace('public', '/storage',$product->image)}}"
+                                       title="{{$product->name}}">
+                                        <img src="{{str_replace('public', '/storage',$product->image)}}"
+                                             title="{{$product->name}}"
+                                             alt="{{$product->name}}"/>
+                                    </a>
+                                    @foreach ($product->galleries as $gallery)
+                                        <a class="thumbnail"
+                                           href="#"
+                                           data-zoom-image="{{str_replace('public', '/storage',$gallery->path)}}"
+                                           data-image="{{str_replace('public', '/storage',$gallery->path)}}"
+                                           title="{{$gallery->product->name}}">
+                                            <img src="{{str_replace('public', '/storage',$gallery->path)}}"
+                                                 title="{{$gallery->product->name}}"
+                                                 alt="{{$gallery->product->name}}"/>
+                                        </a>
+                                    @endforeach
+                                </div>
                             </div>
                             <div class="col-sm-6">
                                 <ul class="list-unstyled description">
@@ -142,7 +144,7 @@
                         <div class="tab-content">
                             <div itemprop="description" id="tab-description" class="tab-pane active">
                                 <div>
-                                  <p class="p-custom-justify-content">{{$product->description}}</p>
+                                    <p class="p-custom-justify-content">{{$product->description}}</p>
                                 </div>
                             </div>
                             <div id="tab-specification" class="tab-pane">
@@ -579,20 +581,20 @@
     <script type="text/javascript">
         // Elevate Zoom for Product Page image
         $("#zoom_01").elevateZoom({
-            gallery:'gallery_01',
+            gallery: 'gallery_01',
             cursor: 'pointer',
             galleryActiveClass: 'active',
             imageCrossfade: true,
             zoomWindowFadeIn: 500,
             zoomWindowFadeOut: 500,
-            zoomWindowPosition : 11,
+            zoomWindowPosition: 11,
             lensFadeIn: 500,
             lensFadeOut: 500,
             loadingIcon: 'image/progress.gif'
         });
         //////pass the images to swipebox
-        $("#zoom_01").bind("click", function(e) {
-            var ez =   $('#zoom_01').data('elevateZoom');
+        $("#zoom_01").bind("click", function (e) {
+            var ez = $('#zoom_01').data('elevateZoom');
             $.swipebox(ez.getGalleryList());
             return false;
         });

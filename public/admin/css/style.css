@@ -1928,6 +1928,10 @@ span.tagRemove:hover {
     margin-top: 5px;
 }
 
+.margin-bottom-15 {
+    margin-bottom: 15px;
+}
+
 .text-danger {
     color: #7c1212;
 }
@@ -1944,4 +1948,52 @@ span.tagRemove:hover {
 .textarea-me {
     resize: none;
     height: 200px;
+}
+
+.btn-delete-me{
+    color: #FFEBEE;
+    background-color: #B71C1C;
+    width: 100px;
+    margin-top:5px;
+    padding:5px 15px;
+    box-sizing: border-box;
+    border-radius:5px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.btn-delete-me:hover {
+    color: #FCE4EC;
+    background-color: #880E4F;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.item-destroy:before {
+    content: '\e129';
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+.item-edit-me:before {
+    content: '\e141';
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+.btn-edit-me{
+    color: #F3E5F5 !important;
+    background-color: #4A148C;
+    width: 100px;
+    margin-top:10px;
+    padding:5px 15px;
+    box-sizing: border-box;
+    border-radius:5px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.btn-edit-me:hover {
+    color: #E1F5FE !important;
+    background-color: #01579B;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
 }

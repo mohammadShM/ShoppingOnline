@@ -2,10 +2,15 @@
 
 namespace App\Models;
 
+use App\Http\Requests\AdminRequest\ProductDiscountCreateRequest;
+use App\Http\Requests\AdminRequest\ProductGalleryRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @method static paginate(int $int)
@@ -31,6 +36,87 @@ class Product extends Model
     public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);
+    }
+
+    public function galleries(): HasMany
+    {
+        return $this->hasMany(Gallery::class);
+    }
+
+    public function discount(): HasOne
+    {
+        return $this->hasOne(Discount::class);
+    }
+
+    /** @noinspection PhpUnhandledExceptionInspection
+     * @noinspection NullPointerExceptionInspection
+     */
+    public function addGallery(ProductGalleryRequest $request): void
+    {
+        $pathName = "ProductsGallery_" . time() . "_" . random_int(111111, 999999) . "_"
+            . $request->file('file')->getClientOriginalName();
+        $path = $request->file('file')->storeAs('public/productGallery', $pathName);
+        $this->galleries()->create([
+            'product_id' => $this->id,
+            'path' => $path,
+            'mime' => $request->file('file')->getClientMimeType(),
+        ]);
+    }
+
+    // for delete picture in gallery in galery database ==================================
+    public function deleteGallery(Gallery $gallery): void
+    {
+        if (Storage::exists($gallery->path)) {
+            Storage::delete($gallery->path);
+        }
+        $gallery->delete();
+    }
+
+    // for add discount for product ==================================
+    public function addDiscount(ProductDiscountCreateRequest $request): void
+    {
+        if (!$this->discount()->exists()) {
+            $this->discount()->create([
+                'product_id' => $this->id,
+                'value' => $request->get('value'),
+            ]);
+        } else {
+            $this->discount->update([
+                'product_id' => $this->id,
+                'value' => $request->get('value'),
+            ]);
+        }
+    }
+
+    // for delete discount for product ==================================
+    public function deleteDiscount(Discount $discount): void
+    {
+        $discount->delete();
+    }
+
+    // for update discount for product ==================================
+    public function updateDiscount(ProductDiscountCreateRequest $request): void
+    {
+        $this->discount->update([
+            'product_id' => $this->id,
+            'value' => $request->get('value'),
+        ]);
+    }
+
+    // for check how set discount for product ==================================
+    public function priceWithDiscount()
+    {
+        if (!$this->discount()->exists()) {
+            return $this->price;
+        }
+        // for set price with discount
+        return $this->price - $this->price * $this->discount->value / 100 ;
+    }
+
+    // for slug in domain alternatives id ==================================
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
     }
 
 }

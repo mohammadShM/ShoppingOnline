@@ -6,10 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-/**
- * @property mixed $path
- */
-class Gallery extends Model
+class Discount extends Model
 {
     use HasFactory;
 
@@ -17,7 +14,7 @@ class Gallery extends Model
 
     public function product(): BelongsTo
     {
-        return $this->belongsTo(Product::class);
+        return $this->BelongsTo(Product::class);
     }
 
 }

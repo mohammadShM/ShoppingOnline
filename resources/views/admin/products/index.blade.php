@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('content')
     <div class="main-content padding-0 categories">
-        <div class="row no-gutters  ">
+        <div class="row no-gutters">
             <div class="col-8 margin-left-10 margin-bottom-15 border-radius-3">
                 <p class="box__title">برند ها</p>
                 <div class="table__box">
@@ -16,6 +16,7 @@
                             <th>برند محصول</th>
                             <th>تاریخ ایجاد</th>
                             <th>گالری</th>
+                            <th>تخفیف</th>
                             <th>مشاهده</th>
                             <th>ویرایش</th>
                             <th>حذف</th>
@@ -47,17 +48,32 @@
                                             ->formatDate()}}</a>
                                 </td>
                                 <td>
-                                    <a href="{{route('product.gallery.index',$product->id)}}"
-                                       class="text-success">مشاهده</a>
+                                    <a href="{{route('product.gallery.index',$product)}}" class="text-warning">مشاهده</a>
+                                </td>
+                                <td>
+                                    @if (!$product->discount()->exists())
+                                        <a href="{{route('product.discount.create',$product)}}"
+                                           class="text-info">ایجاد تخفیف</a>
+                                    @else
+                                        % {{$product->discount->value}}
+                                        <form action="{{route('product.discount.destroy',['product'=>$product,
+                                            'discount'=>$product->discount])}}" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="item-destroy btn-delete-me">حذف</button>
+                                        </form>
+                                        <a href="{{route('product.discount.edit',['product'=>$product,
+                                            'discount'=>$product->discount])}}" class="item-edit-me btn-edit-me">ویرایش</a>
+                                    @endif
                                 </td>
                                 <td>
                                     <a href="" target="_blank" class="item-eye" title="مشاهده"></a>
                                 </td>
                                 <td>
-                                    <a href="{{route('product.edit',$product->id)}}" class="item-edit" title="ویرایش"></a>
+                                    <a href="{{route('product.edit',$product)}}" class="item-edit" title="ویرایش"></a>
                                 </td>
                                 <td>
-                                    <form action="{{route('product.destroy',$product->id)}}" method="post">
+                                    <form action="{{route('product.destroy',$product)}}" method="post">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="item-delete bg-white button-cursor" title="حذف"></button>
