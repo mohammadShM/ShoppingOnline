@@ -627,7 +627,8 @@
                                                     title=" کتاب آموزش باغبانی " class="img-responsive"/></a></div>
                                         <div class="caption">
                                             <h4><a href="#"> کتاب آموزش باغبانی </a></h4>
-                                            <p class="price"><span class="price-new">98000 تومان</span> <span class="price-old">120000 تومان</span>
+                                            <p class="price"><span class="price-new">98000 تومان</span>
+                                                <span class="price-old">120000 تومان</span>
                                                 <span class="saving">-26%</span></p>
                                         </div>
                                         <div class="button-group">
@@ -1200,11 +1201,14 @@
                                         <h4><a href="{{route('productDetails.show',$product)}}">
                                                 {{$product->name}}</a></h4>
                                         <p class="price">
-                                            <span class="price-new">{{number_format($product->priceWithDiscount())}}
+                                            {{-- <span class="price-new">{{number_format($product->priceWithDiscount())}} --}}
+                                            <span class="price-new">{{number_format($product->price_with_discount)}}
                                                 تومان </span>
-                                            @if ($product->discount()->exists())
+                                            {{-- @if ($product->discount()->exists()) --}}
+                                            @if ($product->has_discount)
                                                 <span class="price-old">{{number_format($product->price)}} تومان </span>
-                                                <span class="saving">{{$product->discount->value}}%</span>
+                                                {{-- <span class="saving">{{$product->discount->value}}%</span> --}}
+                                                <span class="saving">{{$product->discount_value }}%</span>
                                             @endif
                                         </p>
                                         <div class="rating"><span class="fa fa-stack"><i class="fa fa-star fa-stack-2x">

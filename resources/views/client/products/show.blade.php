@@ -63,10 +63,14 @@
                                     <li><b>وضعیت موجودی :</b> <span class="instock">موجود</span></li>
                                 </ul>
                                 <ul class="price-box">
-                                    <li class="price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><span
-                                            class="price-old">12 میلیون تومان</span>
-                                        <span itemprop="price">{{$product->price}} تومان<span
-                                                itemprop="availability" content="موجود"></span></span></li>
+                                    <li class="price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                                        {{-- @if ($product->discount()->exists()) --}}
+                                        @if ($product->has_discount)
+                                            <span class="price-old">{{number_format($product->price)}}</span>
+                                        @endif
+                                        {{-- <span itemprop="price">{{number_format($product->priceWithDiscount())}} تومان --}}
+                                        <span itemprop="price">{{number_format($product->price_with_discount)}} تومان
+                                            <span itemprop="availability" content="موجود"></span></span></li>
                                     <li></li>
                                     <li>بدون مالیات : 9 میلیون تومان</li>
                                 </ul>

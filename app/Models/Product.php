@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection UnknownInspectionInspection */
 
 namespace App\Models;
 
@@ -103,6 +103,7 @@ class Product extends Model
         ]);
     }
 
+    /* // set by normal method ==================================
     // for check how set discount for product ==================================
     public function priceWithDiscount()
     {
@@ -111,6 +112,38 @@ class Product extends Model
         }
         // for set price with discount
         return $this->price - $this->price * $this->discount->value / 100 ;
+    } */
+
+    // use in blade by casting = $product->price_with_discount ==================================
+    // set by Eloquent: Mutators & Casting ==================================
+    // for check how set discount for product ==================================
+    /** @noinspection PhpUnused */
+    public function getPriceWithDiscountAttribute()
+    {
+        if (!$this->discount()->exists()) {
+            return $this->price;
+        }
+        // for set price with discount
+        return $this->price - $this->price * $this->discount->value / 100;
+    }
+
+    // use in blade by casting = $product->has_discount ==================================
+    // set mutators methoad for cheack has discount ==================================
+    /** @noinspection PhpUnused */
+    public function getHasDiscountAttribute(): bool
+    {
+        return $this->discount()->exists();
+    }
+
+    // use in blade by casting = $product->discount_value ==================================
+    // set mutators methoad for get value column in discount model ==================================
+    /** @noinspection PhpUnused */
+    public function getDiscountValueAttribute()
+    {
+        if ($this->has_discount) {
+            return $this->discount->value;
+        }
+        return null;
     }
 
     // for slug in domain alternatives id ==================================
