@@ -6,6 +6,8 @@ use App\Http\Controllers\AdminController\DiscountController;
 use App\Http\Controllers\AdminController\GalleryController;
 use App\Http\Controllers\AdminController\PanelController;
 use App\Http\Controllers\AdminController\ProductController as ProductControllerAdmin;
+use App\Http\Controllers\AdminController\RoleController;
+use App\Http\Controllers\AdminController\UserController;
 use App\Http\Controllers\clientController\indexController;
 use App\Http\Controllers\clientController\ProductController as ProductControllerClient;
 use Illuminate\Support\Facades\Route;
@@ -24,4 +26,6 @@ Route::prefix('adminPanel')->group(function () {
     Route::resource('product', ProductControllerAdmin::class);
     Route::resource('product.gallery', GalleryController::class);
     Route::resource('product.discount', DiscountController::class);
+    Route::resource('role', RoleController::class);
+    Route::resource('user', UserController::class);
 });

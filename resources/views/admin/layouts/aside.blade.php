@@ -9,6 +9,8 @@
         </div>
         <span class="profile__name">کاربر : احمد محمدی</span></div>
     <ul>
+        <li class="item-li i-users {{ request()->is('adminPanel/user/create') ? 'is-active' : '' }}">
+            <a href="{{route('user.create')}}">کاربر ها</a></li>
         <li class="item-li i-dashboard {{ request()->is('adminPanel') ? 'is-active' : '' }}">
             <a href="{{route('index')}}">پیشخوان</a></li>
         <li class="item-li i-categories {{ request()->is('adminPanel/category/create') ? 'is-active' : '' }}">
@@ -17,6 +19,8 @@
             <a href="{{route('brand.create')}}">برند ها</a></li>
         <li class="item-li i-courses {{ request()->is('adminPanel/product/create') ? 'is-active' : '' }}">
             <a href="{{route('product.create')}}">محصولات</a></li>
+        <li class="item-li i-articles {{ request()->is('adminPanel/role/create') ? 'is-active' : '' }}">
+            <a href="{{route('role.create')}}">نقش ها</a></li>
         {{-- <li class="item-li i-users"><a href="#"> کاربران</a></li> --}}
         {{-- <li class="item-li i-slideshow"><a href="#">اسلایدشو</a></li> --}}
         {{-- <li class="item-li i-banners"><a href="#">بنر ها</a></li> --}}
