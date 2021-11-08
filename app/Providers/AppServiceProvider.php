@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // set gloabal data for header menu in client pages in index home and single product page
-        view()->composer(['client.index', 'client.products.show'], function ($view) {
+        view()->composer(['client.index', 'client.products.show','client.register.create'], function ($view) {
             $categories = Category::query()->where('parent_id', null)->get();
             $brands = Brand::all();
             $view->with([

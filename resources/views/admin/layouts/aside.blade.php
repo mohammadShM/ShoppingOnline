@@ -19,7 +19,7 @@
             <a href="{{route('brand.create')}}">برند ها</a></li>
         <li class="item-li i-courses {{ request()->is('adminPanel/product/create') ? 'is-active' : '' }}">
             <a href="{{route('product.create')}}">محصولات</a></li>
-        <li class="item-li i-articles {{ request()->is('adminPanel/role/create') ? 'is-active' : '' }}">
+        <li class="item-li i-articles @if(request()->routeIs('role.create','role.edit')) is-active @endif">
             <a href="{{route('role.create')}}">نقش ها</a></li>
         {{-- <li class="item-li i-users"><a href="#"> کاربران</a></li> --}}
         {{-- <li class="item-li i-slideshow"><a href="#">اسلایدشو</a></li> --}}

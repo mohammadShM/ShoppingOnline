@@ -10,12 +10,16 @@ use App\Http\Controllers\AdminController\RoleController;
 use App\Http\Controllers\AdminController\UserController;
 use App\Http\Controllers\clientController\indexController;
 use App\Http\Controllers\clientController\ProductController as ProductControllerClient;
+use App\Http\Controllers\clientController\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 // client =============================================================
 Route::prefix('')->group(function () {
     Route::get('/', [indexController::class, 'index'])->name('home');
     Route::get('productDetails/{product}', [ProductControllerClient::class, 'show'])->name('productDetails.show');
+    Route::get('register',[RegisterController::class,'create'])->name('register.create');
+    Route::post('register/sendmail',[RegisterController::class,'sendMail'])->name('register.sendmail');
+    Route::get('register/otp',[RegisterController::class,'otp'])->name('register.otp');
 });
 
 // admin =============================================================

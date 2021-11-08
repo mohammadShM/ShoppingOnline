@@ -114,7 +114,7 @@
                     <div id="top-links" class="nav pull-right flip">
                         <ul>
                             <li><a href="#">ورود</a></li>
-                            <li><a href="#">ثبت نام</a></li>
+                            <li><a href="{{route('register.create')}}">ثبت نام</a></li>
                         </ul>
                     </div>
                 </div>
