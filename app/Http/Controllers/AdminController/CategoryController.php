@@ -19,11 +19,18 @@ class CategoryController extends Controller
 
     public function create()
     {
+        // for aquals !allows and denies in Gate =====================================
+//        if (Gate::denies('create-category')) {
+//            abort(403);
+//        }
+//        if (!Gate::allows('create-category')) {
+//            abort(403);
+//        }
         // for category list
         $categories = Category::paginate(10);
         // for select category
         $selectCategories = Category::all();
-        return view('admin.categories.index', compact('categories','selectCategories'));
+        return view('admin.categories.index', compact('categories', 'selectCategories'));
     }
 
     public function store(CategoryCreateRequest $request)
@@ -33,7 +40,7 @@ class CategoryController extends Controller
             "title_fa" => $request->get('title_fa'),
             "title_en" => $request->get('title_en'),
         ]);
-        return back()->with('success','دسته با موفقیت افزوده شد');
+        return back()->with('success', 'دسته با موفقیت افزوده شد');
     }
 
     public function show($id)

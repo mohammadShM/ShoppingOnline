@@ -9,10 +9,10 @@
         </div>
         <span class="profile__name">کاربر : احمد محمدی</span></div>
     <ul>
-        <li class="item-li i-users {{ request()->is('adminPanel/user/create') ? 'is-active' : '' }}">
-            <a href="{{route('user.create')}}">کاربر ها</a></li>
         <li class="item-li i-dashboard {{ request()->is('adminPanel') ? 'is-active' : '' }}">
             <a href="{{route('index')}}">پیشخوان</a></li>
+        <li class="item-li i-users {{ request()->is('adminPanel/user/create') ? 'is-active' : '' }}">
+            <a href="{{route('user.create')}}">کاربر ها</a></li>
         <li class="item-li i-categories {{ request()->is('adminPanel/category/create') ? 'is-active' : '' }}">
             <a href="{{route('category.create')}}">دسته بندی ها</a></li>
         <li class="item-li i-brand {{ request()->is('adminPanel/brand/create') ? 'is-active' : '' }}">

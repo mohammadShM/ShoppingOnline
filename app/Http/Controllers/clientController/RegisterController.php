@@ -3,17 +3,20 @@
 namespace App\Http\Controllers\clientController;
 
 use App\Http\Controllers\Controller;
-use App\Mail\OtpMail;
-use App\Models\Role;
 use App\Models\User;
 use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
 
-    public function create()
+    public function create(): Factory|View|Application
     {
         return view('client.register.create');
     }
@@ -21,25 +24,38 @@ class RegisterController extends Controller
     /**
      * @throws Exception
      */
-    public function sendMail(Request $request)
+    public function sendMail(Request $request): Redirector|Application|RedirectResponse
     {
         $this->validate($request, [
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email',
         ]);
-        $otp = random_int(11_111, 99_999);
-        $user = User::query()->create([
-            'email' => $request->get('email'),
-            'password' => bcrypt($otp),
-            'role_id' => Role::findByTitle('normal-user')->id,
-        ]);
-        // send otp email to user =========================================
-        Mail::to($user->email)->send(new OtpMail($otp));
-        return redirect(route('register.otp'));
+        $user = User::genarateOtp($request);
+        return redirect(route('register.otp', $user));
     }
 
-    public function otp()
+    public function otp(User $user): Factory|View|Application
     {
+        return view('client.register.verifyOtp', [
+            'user' => $user,
+        ]);
+    }
 
+    public function verifyOtp(Request $request, User $user): Redirector|Application|RedirectResponse
+    {
+        $this->validate($request, [
+            'otp' => 'required|max:5|min:5|lte:99999|gte:11111',
+        ]);
+        if (!Hash::check($request->get('otp'), $user->password)) {
+            return back()->withErrors(['otp' => 'کد وارد شده صحیح نیست!!']);
+        }
+        auth()->login($user);
+        return redirect(route('home'));
+    }
+
+    public function logout(): RedirectResponse|Application|Redirector
+    {
+        auth()->logout();
+        return redirect(route('home'));
     }
 
 }
