@@ -86,6 +86,7 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
+        $category->propertyGroups()->detach();
         $category->delete();
         return back();
     }
