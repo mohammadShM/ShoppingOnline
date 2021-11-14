@@ -17,7 +17,7 @@
                 <div class="col-sm-12" id="content">
                     <h1 class="title">ثبت نام حساب کاربری</h1>
                     <p>اگر قبلا حساب کاربریتان را ایجاد کرد اید جهت ورود به <a href="">صفحه لاگین</a> مراجعه کنید.</p>
-                    <form class="form-horizontal" method="post" action="{{route('register.sendmail')}}">
+                    <form class="form-horizontal" method="post" action="{{route('client.register.sendmail')}}">
                         @csrf
                         <fieldset id="account">
                             <legend>برای ارسال کد تایید ایمیل خود را وارد نمایید</legend>

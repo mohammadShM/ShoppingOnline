@@ -14,7 +14,7 @@
                 <div class="col-sm-12" id="content">
                     <h1 class="title">ثبت نام حساب کاربری</h1>
                     <p>اگر قبلا حساب کاربریتان را ایجاد کرد اید جهت ورود به <a href="">صفحه لاگین</a> مراجعه کنید.</p>
-                    <form class="form-horizontal" method="post" action="{{route('register.verifyOtp',$user)}}">
+                    <form class="form-horizontal" method="post" action="{{route('client.register.verifyOtp',$user)}}">
                         @csrf
                         <fieldset id="account">
                             <legend>کد ارسال شده به ایمیل خود را وارد نمایید</legend>

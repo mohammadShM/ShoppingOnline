@@ -27,12 +27,29 @@
                         @else
                             <option value selected>{{optional($category->parent)->title_fa}}</option>
                         @endif
-                            <option value>بدون والد</option>
+                        <option value>بدون والد</option>
                         @foreach($categories as $parent)
                             <option value="{{$parent->id}}">{{$parent->title_fa}}</option>
                         @endforeach
                     </select>
-                    <button class="btn btn-brand">اضافه کردن</button>
+                    <div class="form-grup">
+                        <label><span style="font-size:20px ;margin-bottom:15px;font-weight:bolder;">
+                    انتخاب گروه مشخصات
+                            </span></label>
+                        <div class="row padding-0-18">
+                            @foreach ($propertyGroup as $value=>$group)
+                                <div class="col-3" style="margin-right: 5px;">
+                                    <input @if($category->hasPropertyGroup($group)) checked @endif
+                                        class="checked" type="checkbox" name="propertyGroups[]" value="{{$group->id}}">
+                                    <b style="margin-right: 5px;">{{$group->title}}</b>
+                                </div>
+                                @if ($value %4 ===3)
+                                    <hr style="color: #919191;height:2px;width:100%;background-color:#919191;margin: 5px 10px ;">
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                    <button class="btn btn-brand">ویرایش</button>
                 </form>
             </div>
         </div>

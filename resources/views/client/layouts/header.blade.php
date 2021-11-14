@@ -113,14 +113,14 @@
                     </div>
                     <div id="top-links" class="nav pull-right flip">
                        @auth
-                            <form action="{{route('logout')}}" method="post">
+                            <form action="{{route('client.logout')}}" method="post">
                                 @csrf
                                 @method('delete')
                                 <input type="submit" name="logout" value="خروج" class="btn btn-sm btn-danger">
                             </form>
                         @else
                             <ul>
-                                <li><a href="{{route('register.create')}}">ورود||ثبت نام</a></li>
+                                <li><a href="{{route('client.register.create')}}">ورود||ثبت نام</a></li>
                             </ul>
                         @endauth
                     </div>

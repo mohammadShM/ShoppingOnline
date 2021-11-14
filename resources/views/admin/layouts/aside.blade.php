@@ -19,6 +19,10 @@
             <a href="{{route('brand.create')}}">برند ها</a></li>
         <li class="item-li i-courses {{ request()->is('adminPanel/product/create') ? 'is-active' : '' }}">
             <a href="{{route('product.create')}}">محصولات</a></li>
+        <li class="item-li i-tickets {{ request()->is('adminPanel/propertyGroup/create') ? 'is-active' : '' }}">
+            <a href="{{route('propertyGroup.create')}}">گروه مشخصات</a></li>
+        <li class="item-li i-transactions {{ request()->is('adminPanel/properties/create') ? 'is-active' : '' }}">
+            <a href="{{route('properties.create')}}">مشخصات</a></li>
         <li class="item-li i-articles @if(request()->routeIs('role.create','role.edit')) is-active @endif">
             <a href="{{route('role.create')}}">نقش ها</a></li>
         {{-- <li class="item-li i-users"><a href="#"> کاربران</a></li> --}}

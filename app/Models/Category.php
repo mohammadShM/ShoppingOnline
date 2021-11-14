@@ -31,16 +31,32 @@ class Category extends Model
         return $this->hasMany(__CLASS__, 'parent_id');
     }
 
+    /** @noinspection PhpUnused
+     * @noinspection UnknownInspectionInspection
+     */
     public function getAllSubCategoryProducts()
     {
         // get id category
-        $parent = $this->id;
+        $parentIds = $this->id;
         // get all id in subCategories in parent category
-        $children = $this->children()->pluck('id');
+        $childrenIds = $this->children()->pluck('id');
         // get product by parent category and sub category
-        return Product::query()->whereIn('category_id', $children)
-            ->orWhere('category_id', $parent)
+        return Product::query()->whereIn('category_id', $childrenIds)
+            ->orWhere('category_id', $parentIds)
             ->get();
+    }
+
+    public function propertyGroups()
+    {
+        return $this->belongsToMany(PropertyGroup::class);
+    }
+
+    /** @noinspection PhpUnused
+     * @noinspection UnknownInspectionInspection
+     */
+    public function hasPropertyGroup($propertyGroup)
+    {
+        return $this->propertyGroups()->where('property_group_id', $propertyGroup->id)->exists();
     }
 
 }

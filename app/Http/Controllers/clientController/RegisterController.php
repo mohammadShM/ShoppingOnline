@@ -30,7 +30,7 @@ class RegisterController extends Controller
             'email' => 'required|email',
         ]);
         $user = User::genarateOtp($request);
-        return redirect(route('register.otp', $user));
+        return redirect(route('client.register.otp', $user));
     }
 
     public function otp(User $user): Factory|View|Application
@@ -49,13 +49,13 @@ class RegisterController extends Controller
             return back()->withErrors(['otp' => 'کد وارد شده صحیح نیست!!']);
         }
         auth()->login($user);
-        return redirect(route('home'));
+        return redirect(route('client.index'));
     }
 
     public function logout(): RedirectResponse|Application|Redirector
     {
         auth()->logout();
-        return redirect(route('home'));
+        return redirect(route('client.index'));
     }
 
 }

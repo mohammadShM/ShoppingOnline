@@ -1193,12 +1193,12 @@
                         <div class="owl-carousel latest_category_carousel">
                             @forelse ($parentCategory->getAllSubCategoryProducts() as $product)
                                 <div class="product-thumb">
-                                    <div class="image"><a href="{{route('productDetails.show',$product)}}"><img
+                                    <div class="image"><a href="{{route('client.productDetails.show',$product)}}"><img
                                                 src="{{str_replace('public','storage',$product->image)}}"
                                                 alt="{{$product->name}}" title="{{$product->name}}"
                                                 class="img-responsive"/></a></div>
                                     <div class="caption">
-                                        <h4><a href="{{route('productDetails.show',$product)}}">
+                                        <h4><a href="{{route('client.productDetails.show',$product)}}">
                                                 {{$product->name}}</a></h4>
                                         <p class="price">
                                             {{-- <span class="price-new">{{number_format($product->priceWithDiscount())}} --}}

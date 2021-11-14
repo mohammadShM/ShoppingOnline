@@ -2002,3 +2002,47 @@ span.tagRemove:hover {
 /*    text-align: center !important;*/
 /*    margin-top: 10px !important;*/
 /*}*/
+
+/* ==================================== for paginate ==================================== */
+
+.links_center_me {
+    width: 100%;
+    text-align: center;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    padding:6px 2px;
+    box-sizing: border-box;
+    margin-top:10px;
+    margin-bottom:10px;
+    background-color: #ffffff;
+}
+
+/*.links_center_me > nav > div > span {*/
+/*    color: #8a6d3b !important;*/
+/*    background-color: #00A0D1 !important;*/
+/*    padding: 2px 10px !important;*/
+/*    box-sizing: border-box !important;*/
+/*}*/
+
+/*.links_center_me > nav > div > a {*/
+/*    color: #8a6d3b !important;*/
+/*    background-color: #00A0D1 !important;*/
+/*    padding: 2px 10px !important;*/
+/*    box-sizing: border-box !important;*/
+/*}*/
+
+/*.links_center_me > nav > div > div > p {*/
+/*    background-color: #212121 !important;*/
+/*    color: #fcfcfc !important;*/
+/*}*/
+
+/*.links_center_me > nav > div > div > p > span{*/
+/*    color: #fff !important;*/
+/*}*/
+
+/*.links_center_me > nav > div > div > span > span{*/
+/*    color: #fcfcfc !important;*/
+/*}*/
+
+/*.links_center_me > nav > div > div > span > a{*/
+/*    color: #fcfcfc !important;*/
+/*}*/

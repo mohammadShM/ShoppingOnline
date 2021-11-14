@@ -6,17 +6,18 @@ use App\Http\Controllers\AdminController\DiscountController;
 use App\Http\Controllers\AdminController\GalleryController;
 use App\Http\Controllers\AdminController\PanelController;
 use App\Http\Controllers\AdminController\ProductController as ProductControllerAdmin;
+use App\Http\Controllers\AdminController\PropertyController;
+use App\Http\Controllers\AdminController\PropertyGroupController;
 use App\Http\Controllers\AdminController\RoleController;
 use App\Http\Controllers\AdminController\UserController;
 use App\Http\Controllers\clientController\indexController;
 use App\Http\Controllers\clientController\ProductController as ProductControllerClient;
 use App\Http\Controllers\clientController\RegisterController;
-use App\Http\Middleware\CheckPermission;
 use Illuminate\Support\Facades\Route;
 
 // client =============================================================
-Route::prefix('')->group(function () {
-    Route::get('/', [indexController::class, 'index'])->name('client.index');
+Route::prefix('')->name('client.')->group(function () {
+    Route::get('/', [indexController::class, 'index'])->name('index');
     Route::get('productDetails/{product}', [ProductControllerClient::class, 'show'])->name('productDetails.show');
     Route::get('register', [RegisterController::class, 'create'])->name('register.create');
     Route::post('register/sendmail', [RegisterController::class, 'sendMail'])->name('register.sendmail');
@@ -27,8 +28,8 @@ Route::prefix('')->group(function () {
 
 // admin =============================================================
 Route::prefix('adminPanel')->middleware([
-    CheckPermission::class . ':view-dashboard',
-    'auth', // for check user login in site
+//    CheckPermission::class . ':view-dashboard',
+//    'auth', // for check user login in site
 ])->group(function () {
     Route::resource('/', PanelController::class);
     Route::resource('category', CategoryController::class);
@@ -36,6 +37,8 @@ Route::prefix('adminPanel')->middleware([
     Route::resource('product', ProductControllerAdmin::class);
     Route::resource('product.gallery', GalleryController::class);
     Route::resource('product.discount', DiscountController::class);
+    Route::resource('propertyGroup', PropertyGroupController::class);
+    Route::resource('properties', PropertyController::class);
     Route::resource('role', RoleController::class);
     Route::resource('user', UserController::class);
 });

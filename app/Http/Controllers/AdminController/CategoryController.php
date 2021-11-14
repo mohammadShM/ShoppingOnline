@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminRequest\CategoryCreateRequest;
 use App\Http\Requests\AdminRequest\CategoryUpdateRequest;
 use App\Models\Category;
+use App\Models\PropertyGroup;
 
 class CategoryController extends Controller
 {
@@ -30,16 +31,24 @@ class CategoryController extends Controller
         $categories = Category::paginate(10);
         // for select category
         $selectCategories = Category::all();
-        return view('admin.categories.index', compact('categories', 'selectCategories'));
+        // for all propertyGroup
+        $propertyGroup = PropertyGroup::all();
+        return view('admin.categories.index', [
+            'categories' => $categories,
+            'selectCategories' => $selectCategories,
+            'propertyGroup' => $propertyGroup,
+        ]);
     }
 
     public function store(CategoryCreateRequest $request)
     {
-        Category::query()->create([
+        /** @var Category $category */
+        $category = Category::query()->create([
             "parent_id" => $request->get('parent_id'),
             "title_fa" => $request->get('title_fa'),
             "title_en" => $request->get('title_en'),
         ]);
+        $category->propertyGroups()->attach($request->get('propertyGroups'));
         return back()->with('success', 'دسته با موفقیت افزوده شد');
     }
 
@@ -51,7 +60,12 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         $categories = Category::all();
-        return view('admin.categories.edit', compact('category', 'categories'));
+        $propertyGroup = PropertyGroup::all();
+        return view('admin.categories.edit', [
+            'category' => $category,
+            'categories' => $categories,
+            'propertyGroup' => $propertyGroup,
+        ]);
     }
 
     public function update(CategoryUpdateRequest $request, Category $category)
@@ -66,6 +80,7 @@ class CategoryController extends Controller
             "title_fa" => $request->get('title_fa'),
             "title_en" => $request->get('title_en'),
         ]);
+        $category->propertyGroups()->sync($request->get('propertyGroups'));
         return redirect(route('category.create'));
     }
 
