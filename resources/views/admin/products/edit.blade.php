@@ -8,7 +8,7 @@
                     <div class="text-success text-center margin-top-15">{{session('success')}}</div>
                 @endif
                 @include('admin.layouts.errors')
-                <form action="{{route('product.update',$product->id)}}" method="post"
+                <form action="{{route('product.update',$product)}}" method="post"
                       class="padding-30" enctype="multipart/form-data">
                     @csrf
                     @method('patch')

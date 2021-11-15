@@ -7,16 +7,19 @@ use App\Http\Requests\AdminRequest\ProductGalleryRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Testing\Fluent\Concerns\Has;
 
 /**
  * @method static paginate(int $int)
  * @method static create(array $array)
  * @property mixed $image
  * @property mixed $id
+ * @property mixed $category
  */
 class Product extends Model
 {
@@ -46,6 +49,11 @@ class Product extends Model
     public function discount(): HasOne
     {
         return $this->hasOne(Discount::class);
+    }
+
+    public function properties(): BelongsToMany
+    {
+        return $this->belongsToMany(Property::class)->withPivot(['value'])->withTimestamps();
     }
 
     /** @noinspection PhpUnhandledExceptionInspection

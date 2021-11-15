@@ -44,12 +44,13 @@
                                     <b style="margin-right: 5px;">{{$group->title}}</b>
                                 </div>
                                 @if ($value %4 ===3)
-                                    <hr style="color: #919191;height:2px;width:100%;background-color:#919191;margin: 5px 10px ;">
+                                    <hr style="color: #919191;height:2px;width:100%;background-color:#919191;
+                                        margin: 5px 10px ;">
                                 @endif
                             @endforeach
                         </div>
                     </div>
-                    <button class="btn btn-brand">ویرایش</button>
+                    <button class="btn btn-brand margin-top-15">ویرایش</button>
                 </form>
             </div>
         </div>

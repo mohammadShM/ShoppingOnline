@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController\DiscountController;
 use App\Http\Controllers\AdminController\GalleryController;
 use App\Http\Controllers\AdminController\PanelController;
 use App\Http\Controllers\AdminController\ProductController as ProductControllerAdmin;
+use App\Http\Controllers\AdminController\ProductPropertyController;
 use App\Http\Controllers\AdminController\PropertyController;
 use App\Http\Controllers\AdminController\PropertyGroupController;
 use App\Http\Controllers\AdminController\RoleController;
@@ -37,6 +38,12 @@ Route::prefix('adminPanel')->middleware([
     Route::resource('product', ProductControllerAdmin::class);
     Route::resource('product.gallery', GalleryController::class);
     Route::resource('product.discount', DiscountController::class);
+    Route::get('products/{product}/properties', [ProductPropertyController::class, 'index'])
+        ->name('product.properties.index');
+    Route::get('products/{product}/properties/create', [ProductPropertyController::class, 'create'])
+        ->name('product.properties.create');
+    Route::post('products/{product}/properties', [ProductPropertyController::class, 'store'])
+        ->name('product.properties.store');
     Route::resource('propertyGroup', PropertyGroupController::class);
     Route::resource('properties', PropertyController::class);
     Route::resource('role', RoleController::class);

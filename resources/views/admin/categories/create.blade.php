@@ -33,6 +33,6 @@
                 @endforeach
             </div>
         </div>
-        <button class="btn btn-brand">اضافه کردن</button>
+        <button class="btn btn-brand margin-top-15">اضافه کردن</button>
     </form>
 </div>

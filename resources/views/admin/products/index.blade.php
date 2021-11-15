@@ -17,6 +17,7 @@
                             <th>تاریخ ایجاد</th>
                             <th>گالری</th>
                             <th>تخفیف</th>
+                            <th>ویژگی(مشخصات)</th>
                             <th>مشاهده</th>
                             <th>ویرایش</th>
                             <th>حذف</th>
@@ -68,6 +69,7 @@
                                             'discount'=>$product->discount])}}" class="item-edit-me btn-edit-me">ویرایش</a>
                                     @endif
                                 </td>
+                                <td><a href="{{route('product.properties.index',$product)}}" class="text-success">ویژگی</a></td>
                                 <td>
                                     <a href="" target="_blank" class="item-eye" title="مشاهده"></a>
                                 </td>
