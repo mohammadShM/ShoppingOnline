@@ -56,6 +56,11 @@ class Product extends Model
         return $this->belongsToMany(Property::class)->withPivot(['value'])->withTimestamps();
     }
 
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     /** @noinspection PhpUnhandledExceptionInspection
      * @noinspection NullPointerExceptionInspection
      */

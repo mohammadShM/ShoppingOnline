@@ -34,6 +34,7 @@ class ProductPropertyController extends Controller
     /** @noinspection PhpInconsistentReturnPointsInspection */
     public function store(Request $request, Product $product): RedirectResponse
     {
+        // FOR value empty for property in product then not save in table create_product_property_table and rmove row
         $properties = collect($request->get('properties'))->filter(function ($item) {
             if (!empty($item['value'])) {
                 return $item;

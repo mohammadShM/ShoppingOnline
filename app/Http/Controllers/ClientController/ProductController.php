@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\clientController;
+namespace App\Http\Controllers\ClientController;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
@@ -15,6 +15,7 @@ class ProductController extends Controller
     {
         return view('client.products.show', [
             'product' => $product,
+            'propertyGroups' => $product->category->propertyGroups,
         ]);
     }
 

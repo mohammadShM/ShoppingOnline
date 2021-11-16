@@ -64,7 +64,7 @@
                 <div class="dropdown-menu">
                     @foreach ($brands as $brand)
                         <div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img
-                                    src="{{str_ireplace('public', 'storage', $brand->image)}}"
+                                    src="{{asset(str_ireplace('public', 'storage', $brand->image))}}"
                                     title="{{$brand->name}}" alt="{{$brand->name}}"
                                     width="50" height="50"/>
                             </a><a href="#">{{$brand->name}}</a></div>

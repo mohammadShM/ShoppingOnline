@@ -16,9 +16,9 @@
                             <th>برند محصول</th>
                             <th>تاریخ ایجاد</th>
                             <th>گالری</th>
-                            <th>تخفیف</th>
                             <th>ویژگی(مشخصات)</th>
-                            <th>مشاهده</th>
+                            <th>نظرات</th>
+                            <th>تخفیف</th>
                             <th>ویرایش</th>
                             <th>حذف</th>
                         </tr>
@@ -51,6 +51,8 @@
                                 <td>
                                     <a href="{{route('product.gallery.index',$product)}}" class="text-warning">مشاهده</a>
                                 </td>
+                                <td><a href="{{route('product.properties.index',$product)}}" class="text-success">ویژگی</a></td>
+                                <td><a href="{{route('product.comments.index',$product)}}" class="text-warning">نظر</a></td>
                                 <td>
                                     {{-- @if (!$product->discount()->exists()) --}}
                                     @if (!$product->has_discount)
@@ -68,10 +70,6 @@
                                         <a href="{{route('product.discount.edit',['product'=>$product,
                                             'discount'=>$product->discount])}}" class="item-edit-me btn-edit-me">ویرایش</a>
                                     @endif
-                                </td>
-                                <td><a href="{{route('product.properties.index',$product)}}" class="text-success">ویژگی</a></td>
-                                <td>
-                                    <a href="" target="_blank" class="item-eye" title="مشاهده"></a>
                                 </td>
                                 <td>
                                     <a href="{{route('product.edit',$product)}}" class="item-edit" title="ویرایش"></a>
