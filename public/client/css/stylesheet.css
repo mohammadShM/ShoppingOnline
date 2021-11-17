@@ -2000,3 +2000,7 @@ div.required .control-label:before {
 .p-custom-justify-content{
     text-align: justify;
 }
+
+.like-for-show-blade {
+    color: red !important;
+}

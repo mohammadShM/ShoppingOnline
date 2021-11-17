@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
@@ -20,6 +21,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property mixed $id
  * @property mixed $password
  * @property mixed $role
+ * @property mixed $likes
  */
 class User extends Authenticatable
 {
@@ -66,6 +68,13 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
+    // how set name table ? because like not model class and relation many to many for user and product model
+    // and not set name user and product model for table and name table is likes
+    public function likes(): BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, 'likes')->withTimestamps();
+    }
+
     // for send email =========================================
 
     /**
@@ -90,6 +99,17 @@ class User extends Authenticatable
         // send otp email to user =========================================
         Mail::to($user->email)->send(new OtpMail($otp));
         return $user;
+    }
+
+    public function likeProduct(Product $product)
+    {
+        $isLikedBegore = $this->likes()->where('product_id', $product->id)->exists();
+        // $isLikedBegore = $this->likes()->where('id', $product->id)->exists();
+        if ($isLikedBegore) {
+            return $this->likes()->detach($product);
+        }
+        /** @noinspection PhpVoidFunctionResultUsedInspection */
+        return $this->likes()->attach($product);
     }
 
 }

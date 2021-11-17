@@ -147,6 +147,25 @@
 <script type="text/javascript" src="{{asset('./client/js/owl.carousel.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('./client/js/custom.js')}}"></script>
 <!-- JS Part End-->
+<script>
+    function likeProduct(productId) {
+        $.ajax({
+            type: "POST",
+            url: "/likes/" + productId,
+            data: {
+                _token: "{{csrf_token()}}"
+            },
+            success: function (data) {
+                let icon = $('#like-for-show-blade-' + productId + '>.fa-heart');
+                if (icon.hasClass('like-for-show-blade')) {
+                    icon.removeClass('like-for-show-blade');
+                } else {
+                    icon.addClass('like-for-show-blade');
+                }
+            }
+        });
+    }
+</script>
 @yield('js-links')
 </body>
 </html>

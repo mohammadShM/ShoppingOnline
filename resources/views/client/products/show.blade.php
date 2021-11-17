@@ -100,8 +100,11 @@
                                             </button>
                                         </div>
                                         <div>
-                                            <button type="button" class="wishlist" onClick=""><i class="fa fa-heart"></i> افزودن
-                                                به علاقه مندی ها
+                                            <button id="like-for-show-blade-{{$product->id}}" type="button" class="wishlist"
+                                                    onClick=likeProduct({{$product->id}})>
+                                                <i class="fa fa-heart @if(auth()->user() && $product->likes()
+                                                    ->where('user_id',auth()->user()->id)->exists())
+                                                    like-for-show-blade @endif"></i> افزودن به علاقه مندی ها
                                             </button>
                                             <br/>
                                             <button type="button" class="wishlist" onClick=""><i class="fa fa-exchange"></i>
@@ -279,10 +282,10 @@
                                 <div class="button-group">
                                     <button class="btn-primary" type="button" onClick=""><span>افزودن به سبد</span></button>
                                     <div class="add-to-links">
-                                        <button type="button" data-toggle="tooltip" title="افزودن به علاقه مندی" onClick=""><i
-                                                class="fa fa-heart"></i></button>
-                                        <button type="button" data-toggle="tooltip" title="افزودن به مقایسه" onClick=""><i
-                                                class="fa fa-exchange"></i></button>
+                                        <button type="button" data-toggle="tooltip" title="افزودن به علاقه مندی" onClick="">
+                                            <i class="fa fa-heart"></i></button>
+                                        <button type="button" data-toggle="tooltip" title="افزودن به مقایسه" onClick="">
+                                            <i class="fa fa-exchange"></i></button>
                                     </div>
                                 </div>
                             </div>

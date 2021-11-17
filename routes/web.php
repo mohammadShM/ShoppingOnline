@@ -14,16 +14,23 @@ use App\Http\Controllers\AdminController\RoleController;
 use App\Http\Controllers\AdminController\UserController;
 use App\Http\Controllers\ClientController\CommentController as ClientCommentController;
 use App\Http\Controllers\ClientController\indexController;
+use App\Http\Controllers\ClientController\LikeController;
 use App\Http\Controllers\ClientController\ProductController as ProductControllerClient;
 use App\Http\Controllers\ClientController\RegisterController;
 use Illuminate\Support\Facades\Route;
 
-// client =============================================================
+// ============================================= client =============================================
 Route::prefix('')->name('client.')->group(function () {
+    // ============================================= pages =============================================
     Route::get('/', [indexController::class, 'index'])->name('index');
     Route::get('productDetails/{product}', [ProductControllerClient::class, 'show'])->name('productDetails.show');
+    // ============================================= comment =============================================
     Route::post('product/{product}/comments/store', [ClientCommentController::class, 'store'])
         ->name('product.comment.store');
+    // ============================================= like =============================================
+    Route::get('/likes/wishlist', [LikeController::class,'index'])->name('likes.wishlist.index');
+    Route::post('/likes/{product}', [LikeController::class,'store'])->name('likes.store');
+    // ============================================= register =============================================
     Route::get('register', [RegisterController::class, 'create'])->name('register.create');
     Route::post('register/sendmail', [RegisterController::class, 'sendMail'])->name('register.sendmail');
     Route::get('register/otp/{user}', [RegisterController::class, 'otp'])->name('register.otp');
@@ -31,19 +38,19 @@ Route::prefix('')->name('client.')->group(function () {
     Route::delete('logout', [RegisterController::class, 'logout'])->name('logout');
 });
 
-// admin =============================================================
+// ============================================= admin =============================================
 Route::prefix('adminPanel')->middleware([
-//    CheckPermission::class . ':view-dashboard',
-//    'auth', // for check user login in site
+// CheckPermission::class . ':view-dashboard',
+// 'auth', //  for check user login in site
 ])->group(function () {
     Route::resource('/', PanelController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('brand', BrandController::class);
-    // product =============================================================
+    // ============================================= product =============================================
     Route::resource('product', ProductControllerAdmin::class);
     Route::resource('product.gallery', GalleryController::class);
     Route::resource('product.discount', DiscountController::class);
-    // comment =============================================================
+    // ============================================= comment =============================================
     Route::get('products/{product}/comments', [AdminCommentController::class, 'index'])
         ->name('product.comments.index');
     Route::get('comments/{comment}/edit', [AdminCommentController::class, 'edit'])
@@ -54,7 +61,7 @@ Route::prefix('adminPanel')->middleware([
         ->name('product.comments.updateStatus');
     Route::delete('comments/{comment}/destroy', [AdminCommentController::class, 'destroy'])
         ->name('product.comments.destroy');
-    // property =============================================================
+    // ============================================= property =============================================
     Route::get('products/{product}/properties', [ProductPropertyController::class, 'index'])
         ->name('product.properties.index');
     Route::get('products/{product}/properties/create', [ProductPropertyController::class, 'create'])
@@ -63,7 +70,7 @@ Route::prefix('adminPanel')->middleware([
         ->name('product.properties.store');
     Route::resource('propertyGroup', PropertyGroupController::class);
     Route::resource('properties', PropertyController::class);
-    // user and role =============================================================
+    // ============================================= user and role =============================================
     Route::resource('role', RoleController::class);
     Route::resource('user', UserController::class);
 });

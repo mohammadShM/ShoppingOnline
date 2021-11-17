@@ -11,8 +11,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Testing\Fluent\Concerns\Has;
 
 /**
  * @method static paginate(int $int)
@@ -59,6 +59,13 @@ class Product extends Model
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    // how set name table ? because like not model class and relation many to many for user and product model
+    // and not set name user and product model for table and name table is likes
+    public function likes(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'likes')->withTimestamps();
     }
 
     /** @noinspection PhpUnhandledExceptionInspection
@@ -160,9 +167,34 @@ class Product extends Model
     }
 
     // for slug in domain alternatives id ==================================
+
+    /** @noinspection NullPointerExceptionInspection */
     public function getRouteKeyName(): string
     {
-        return 'slug';
+        // for all admin panel pages
+        if (request()->route()->getPrefix() === '/adminPanel') {
+            return 'slug';
+        }
+        // for home page
+        if (request()->routeIs('client.index')) {
+            return 'slug';
+        }
+
+        // for wishlist page
+        if (request()->routeIs('client.likes.wishlist.index')) {
+            return 'slug';
+        }
+        // در روت ها پارامتر ست شده را بررسی می کند و اگر روتی product به عنوان پارامتر ست شده باشد آن روت را
+        // در متغیر ما می ریزد مثل productDetails/{product}
+        // که prouduct همان پارامتر پروداکت هست که ست شده
+        $identifier = Route::current()->parameters()['product'];
+        // بررسی می کند اگر پارامتر پروداکت ما به صورت عددی نبود یعنی مثل روت نمایش محصولات به صورت slug بود پس عدد نیست
+        // پس خروجی کلید ما اسلاگ است در غیر این صورت مثل روت like که در پارامتر پروداکت ما Id محصول را ارسال می کنیم
+        // پس کلید ما آی دی است
+        if (!ctype_digit($identifier)) {
+            return 'slug';
+        }
+        return 'id';
     }
 
 }

@@ -19,8 +19,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('./client/css/stylesheet-rtl.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('./client/css/responsive-rtl.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('./client/css/stylesheet-skin2.css')}}"/>
-    @yield('css-links')
-    <!-- CSS Part End-->
+@yield('css-links')
+<!-- CSS Part End-->
 </head>
 <body>
 <div class="wrapper-wide">
@@ -33,8 +33,13 @@
                         <div class="links">
                             <ul>
                                 <li class="mobile"><i class="fa fa-phone"></i>+21 9898777656</li>
-                                <li class="email"><a href="mailto:info@marketshop.com"><i class="fa fa-envelope"></i>info@marketshop.com</a>
+                                <li class="email"><a href="mailto:info@marketshop.com">
+                                        <i class="fa fa-envelope"></i>info@marketshop.com</a>
                                 </li>
+                                @auth
+                                    <li><a href="{{route('client.likes.wishlist.index')}}">
+                                            لیست علاقه مندی ها <b>{{auth()->user()->likes()->count()}}</b></a></li>
+                                @endauth
                                 <li class="wrap_custom_block hidden-sm hidden-xs"><a>بلاک سفارشی<b></b></a>
                                     <div class="dropdown-menu custom_block">
                                         <ul>
@@ -112,7 +117,7 @@
                         </div>
                     </div>
                     <div id="top-links" class="nav pull-right flip">
-                       @auth
+                        @auth
                             <form action="{{route('client.logout')}}" method="post">
                                 @csrf
                                 @method('delete')
