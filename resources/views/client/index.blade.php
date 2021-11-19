@@ -60,7 +60,8 @@
                                                         title="{{$featuredProduct->name}}"
                                                         class="img-responsive"/></a></div>
                                             <div class="caption">
-                                                <h4><a href="#">{{$featuredProduct->name}}</a></h4>
+                                                <h4><a href="{{route('client.productDetails.show',
+                                        ['product'=>$featuredProduct])}}">{{$featuredProduct->name}}</a></h4>
                                                 <p class="price">
                                                     <span class="price-new">
                                                         {{number_format($featuredProduct->price_with_discount)}} تومان</span>
