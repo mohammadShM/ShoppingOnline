@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController\BrandController;
 use App\Http\Controllers\AdminController\CategoryController;
 use App\Http\Controllers\AdminController\CommentController as AdminCommentController;
 use App\Http\Controllers\AdminController\DiscountController;
+use App\Http\Controllers\AdminController\FeaturedCategoryController;
 use App\Http\Controllers\AdminController\GalleryController;
 use App\Http\Controllers\AdminController\PanelController;
 use App\Http\Controllers\AdminController\ProductController as ProductControllerAdmin;
@@ -11,6 +12,7 @@ use App\Http\Controllers\AdminController\ProductPropertyController;
 use App\Http\Controllers\AdminController\PropertyController;
 use App\Http\Controllers\AdminController\PropertyGroupController;
 use App\Http\Controllers\AdminController\RoleController;
+use App\Http\Controllers\AdminController\SliderController;
 use App\Http\Controllers\AdminController\UserController;
 use App\Http\Controllers\ClientController\CommentController as ClientCommentController;
 use App\Http\Controllers\ClientController\indexController;
@@ -28,14 +30,17 @@ Route::prefix('')->name('client.')->group(function () {
     Route::post('product/{product}/comments/store', [ClientCommentController::class, 'store'])
         ->name('product.comment.store');
     // ============================================= like =============================================
-    Route::get('/likes/wishlist', [LikeController::class,'index'])->name('likes.wishlist.index');
-    Route::post('/likes/{product}', [LikeController::class,'store'])->name('likes.store');
+    Route::get('/likes/wishlist', [LikeController::class, 'index'])->name('likes.wishlist.index');
+    Route::post('/likes/{product}', [LikeController::class, 'store'])->name('likes.store');
+    Route::delete('/likes/{product}', [LikeController::class, 'destroy'])->name('likes.destroy');
     // ============================================= register =============================================
     Route::get('register', [RegisterController::class, 'create'])->name('register.create');
     Route::post('register/sendmail', [RegisterController::class, 'sendMail'])->name('register.sendmail');
     Route::get('register/otp/{user}', [RegisterController::class, 'otp'])->name('register.otp');
     Route::post('register/verifyOtp/{user}', [RegisterController::class, 'verifyOtp'])->name('register.verifyOtp');
     Route::delete('logout', [RegisterController::class, 'logout'])->name('logout');
+    // ============================================= featuredCategory =============================================
+
 });
 
 // ============================================= admin =============================================
@@ -73,4 +78,11 @@ Route::prefix('adminPanel')->middleware([
     // ============================================= user and role =============================================
     Route::resource('role', RoleController::class);
     Route::resource('user', UserController::class);
+    // ============================================= Slider =============================================
+    Route::resource('slider', SliderController::class);
+    // ============================================= featuredCategory =============================================
+    Route::get('featuredCategory/create', [FeaturedCategoryController::class, 'create'])
+        ->name('featuredCategory.create');
+    Route::post('featuredCategory/store', [FeaturedCategoryController::class, 'store'])
+        ->name('featuredCategory.store');
 });

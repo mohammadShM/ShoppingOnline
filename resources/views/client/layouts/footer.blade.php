@@ -155,6 +155,10 @@
             data: {
                 _token: "{{csrf_token()}}"
             },
+            /**
+             * @param data          Information about the object.
+             * @param data.likes_count   Information about the object's members.
+             */
             success: function (data) {
                 let icon = $('#like-for-show-blade-' + productId + '>.fa-heart');
                 if (icon.hasClass('like-for-show-blade')) {
@@ -162,6 +166,7 @@
                 } else {
                     icon.addClass('like-for-show-blade');
                 }
+                $('#likes_count').text(data.likes_count)
             }
         });
     }

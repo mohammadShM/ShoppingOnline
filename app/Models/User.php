@@ -18,10 +18,12 @@ use Laravel\Sanctum\HasApiTokens;
 
 /**
  * @method static paginate(int $int)
+ * @method static where(string $string, mixed $get)
  * @property mixed $id
  * @property mixed $password
  * @property mixed $role
  * @property mixed $likes
+ * @property mixed $email
  */
 class User extends Authenticatable
 {

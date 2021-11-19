@@ -38,7 +38,9 @@
                                 </li>
                                 @auth
                                     <li><a href="{{route('client.likes.wishlist.index')}}">
-                                            لیست علاقه مندی ها <b>{{auth()->user()->likes()->count()}}</b></a></li>
+                                            لیست علاقه مندی ها <b><span id="likes_count">
+                                                    {{auth()->user()->likes()->count()}}
+                                                </span></b></a></li>
                                 @endauth
                                 <li class="wrap_custom_block hidden-sm hidden-xs"><a>بلاک سفارشی<b></b></a>
                                     <div class="dropdown-menu custom_block">

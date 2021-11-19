@@ -8,6 +8,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -33,7 +34,16 @@ class LikeController extends Controller
             return response(['msg' => 'user is not loggedIn', 500]);
         }
         auth()->user()->likeProduct($product);
-        return response(['msg' => 'liked', 200]);
+        return response(['likes_count' => auth()->user()->likes->count(), 200]);
+    }
+
+    public function destroy(Product $product): RedirectResponse
+    {
+        if (!auth()->check() || !auth()->user()) {
+            return back();
+        }
+        auth()->user()->likes()->detach($product);
+        return back();
     }
 
 }

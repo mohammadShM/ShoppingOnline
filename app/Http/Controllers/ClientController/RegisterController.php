@@ -29,6 +29,14 @@ class RegisterController extends Controller
         $this->validate($request, [
             'email' => 'required|email',
         ]);
+        // Temporary for me ======================================================================================
+        /** @var User $userLogin */
+        $userLogin = User::where('email', $request->get('email'))->first();
+        if (isset($userLogin)) {
+            auth()->login($userLogin);
+            return redirect(route('client.index'));
+        }
+        // Temporary for me ======================================================================================
         $user = User::genarateOtp($request);
         return redirect(route('client.register.otp', $user));
     }

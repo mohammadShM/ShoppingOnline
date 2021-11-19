@@ -38,9 +38,13 @@
                                         <button class="btn btn-primary" title="" data-toggle="tooltip" onclick="cart.add('48');"
                                                 type="button"
                                                 data-original-title="افزودن به سبد"><i class="fa fa-shopping-cart"></i></button>
-                                        <a class="btn btn-danger" title="" data-toggle="tooltip"
-                                           href="http://localhost/2.2.0.0-compiled/index.php?route=account/wishlist&amp;remove=48"
-                                           data-original-title="حذف"><i class="fa fa-times"></i></a></td>
+                                        <form action="{{route('client.likes.destroy',$wishlist)}}" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-danger btn-sm" type="submit">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </form>
                                 </tr>
                             @endforeach
                             </tbody>

@@ -197,4 +197,12 @@ class Product extends Model
         return 'id';
     }
 
+    // for liked product And use Eloquent: Mutators & Casting in nlade use ==== is_liked
+
+    /** @noinspection PhpUnused */
+    public function getIsLikedAttribute(): bool
+    {
+        return $this->likes()->where('user_id', auth()->id())->exists();
+    }
+
 }

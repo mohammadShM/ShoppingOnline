@@ -102,8 +102,10 @@
                                         <div>
                                             <button id="like-for-show-blade-{{$product->id}}" type="button" class="wishlist"
                                                     onClick=likeProduct({{$product->id}})>
-                                                <i class="fa fa-heart @if(auth()->user() && $product->likes()
-                                                    ->where('user_id',auth()->user()->id)->exists())
+                                                {{-- <i class="fa fa-heart @if(auth()->user() && $product->likes()--}}
+                                                {{-- ->where('user_id',auth()->user()->id)->exists())--}}
+                                                {{-- like-for-show-blade @endif"></i> افزودن به علاقه مندی ها--}}
+                                                <i class="fa fa-heart @if($product->is_liked)
                                                     like-for-show-blade @endif"></i> افزودن به علاقه مندی ها
                                             </button>
                                             <br/>
