@@ -1,8 +1,6 @@
 <div class="col-12 bg-white">
     <p class="box__title">ایجاد دسته بندی جدید</p>
-    @if (session('success'))
-        <div class="text-success text-center margin-top-15">{{session('success')}}</div>
-    @endif
+    @include('admin.layouts.notification')
     @include('admin.layouts.errors')
     <form action="{{route('category.store')}}" method="post" class="padding-30">
         @csrf

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Observers\CategoryObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,5 +29,7 @@ class AppServiceProvider extends ServiceProvider
                     'brands' => $brands,
                 ]);
             });
+        // for set observer CategoryObserver for Category Model for manage notification sessions
+        Category::observe(CategoryObserver::class);
     }
 }

@@ -148,6 +148,7 @@
 <script type="text/javascript" src="{{asset('./client/js/custom.js')}}"></script>
 <!-- JS Part End-->
 <script>
+    // for like ======================================================================
     function likeProduct(productId) {
         $.ajax({
             type: "POST",
@@ -169,6 +170,21 @@
                 $('#likes_count').text(data.likes_count)
             }
         });
+    }
+</script>
+<script>
+    // for cart ======================================================================
+    function addToCart(productId) {
+        var quantity = $("#input-quantity").val();
+        $.ajax({
+            type: "POST",
+            url: "/cart/store",
+            data: {
+                _token: "{{csrf_token()}}",
+                productId: productId,
+                quantity: quantity,
+            },
+        })
     }
 </script>
 @yield('js-links')

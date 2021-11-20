@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController\CommentController as AdminCommentContro
 use App\Http\Controllers\AdminController\DiscountController;
 use App\Http\Controllers\AdminController\FeaturedCategoryController;
 use App\Http\Controllers\AdminController\GalleryController;
+use App\Http\Controllers\AdminController\OfferController;
 use App\Http\Controllers\AdminController\PanelController;
 use App\Http\Controllers\AdminController\ProductController as ProductControllerAdmin;
 use App\Http\Controllers\AdminController\ProductPropertyController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\AdminController\PropertyGroupController;
 use App\Http\Controllers\AdminController\RoleController;
 use App\Http\Controllers\AdminController\SliderController;
 use App\Http\Controllers\AdminController\UserController;
+use App\Http\Controllers\ClientController\CartController;
 use App\Http\Controllers\ClientController\CommentController as ClientCommentController;
 use App\Http\Controllers\ClientController\indexController;
 use App\Http\Controllers\ClientController\LikeController;
@@ -39,8 +41,8 @@ Route::prefix('')->name('client.')->group(function () {
     Route::get('register/otp/{user}', [RegisterController::class, 'otp'])->name('register.otp');
     Route::post('register/verifyOtp/{user}', [RegisterController::class, 'verifyOtp'])->name('register.verifyOtp');
     Route::delete('logout', [RegisterController::class, 'logout'])->name('logout');
-    // ============================================= featuredCategory =============================================
-
+    // ============================================= cart =============================================
+    Route::post('cart', [CartController::class, 'store'])->name('cart.store');
 });
 
 // ============================================= admin =============================================
@@ -55,6 +57,9 @@ Route::prefix('adminPanel')->middleware([
     Route::resource('product', ProductControllerAdmin::class);
     Route::resource('product.gallery', GalleryController::class);
     Route::resource('product.discount', DiscountController::class);
+    Route::resource('offer', OfferController::class);
+    // ============================================= Slider =============================================
+    Route::resource('slider', SliderController::class);
     // ============================================= comment =============================================
     Route::get('products/{product}/comments', [AdminCommentController::class, 'index'])
         ->name('product.comments.index');
@@ -78,8 +83,6 @@ Route::prefix('adminPanel')->middleware([
     // ============================================= user and role =============================================
     Route::resource('role', RoleController::class);
     Route::resource('user', UserController::class);
-    // ============================================= Slider =============================================
-    Route::resource('slider', SliderController::class);
     // ============================================= featuredCategory =============================================
     Route::get('featuredCategory/create', [FeaturedCategoryController::class, 'create'])
         ->name('featuredCategory.create');

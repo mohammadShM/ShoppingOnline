@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static where(string $string, string $string1, $null)
  * @method static paginate(int $int)
  * @property mixed $id
+ * @property mixed $title_fa
  */
 class Category extends Model
 {

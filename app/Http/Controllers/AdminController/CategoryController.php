@@ -49,7 +49,10 @@ class CategoryController extends Controller
             "title_en" => $request->get('title_en'),
         ]);
         $category->propertyGroups()->attach($request->get('propertyGroups'));
-        return back()->with('success', 'دسته با موفقیت افزوده شد');
+        // session by CategoryObserver =================================
+        // session()->flash('success', 'دسته با موفقیت افزوده شد');
+        // return back()->with('success', 'دسته با موفقیت افزوده شد');
+        return back();
     }
 
     public function show($id)

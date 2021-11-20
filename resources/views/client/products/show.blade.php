@@ -57,7 +57,8 @@
                             </div>
                             <div class="col-sm-6">
                                 <ul class="list-unstyled description">
-                                    <li><b>برند :</b> <a href="#"><span itemprop="brand">{{$product->brand->name}}</span></a></li>
+                                    <li><b>برند :</b> <a href="#">
+                                            <span itemprop="brand">{{$product->brand->name}}</span></a></li>
                                     <li><b>کد محصول :</b> <span itemprop="mpn">{{$product->id}}</span></li>
                                     <li><b>امتیازات خرید:</b> 700</li>
                                     <li><b>وضعیت موجودی :</b> <span class="instock">موجود</span></li>
@@ -96,10 +97,12 @@
                                                 <a class="qtyBtn mines" href="javascript:void(0);">-</a>
                                                 <div class="clear"></div>
                                             </div>
-                                            <button type="button" id="button-cart" class="btn btn-primary btn-lg">افزودن به سبد
+                                            <button type="button" id="button-cart" class="btn btn-primary btn-lg"
+                                                    onClick="addToCart({{$product->id}})">افزودن به سبد
                                             </button>
                                         </div>
                                         <div>
+                                            {{--                                            @auth--}}
                                             <button id="like-for-show-blade-{{$product->id}}" type="button" class="wishlist"
                                                     onClick=likeProduct({{$product->id}})>
                                                 {{-- <i class="fa fa-heart @if(auth()->user() && $product->likes()--}}
@@ -108,6 +111,7 @@
                                                 <i class="fa fa-heart @if($product->is_liked)
                                                     like-for-show-blade @endif"></i> افزودن به علاقه مندی ها
                                             </button>
+                                            {{--                                            @endauth--}}
                                             <br/>
                                             <button type="button" class="wishlist" onClick=""><i class="fa fa-exchange"></i>
                                                 مقایسه این محصول
@@ -566,7 +570,6 @@
     <script type="text/javascript" src="{{asset('./client/js/jquery.elevateZoom-3.0.8.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('./client/js/swipebox/lib/ios-orientationchange-fix.js')}}"></script>
     <script type="text/javascript" src="{{asset('./client/js/swipebox/src/js/jquery.swipebox.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('./client/js/custom.js')}}"></script>
     <script type="text/javascript">
         // Elevate Zoom for Product Page image
         $("#zoom_01").elevateZoom({

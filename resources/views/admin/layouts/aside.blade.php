@@ -21,6 +21,8 @@
             <a href="{{route('brand.create')}}">برند ها</a></li>
         <li class="item-li i-courses {{ request()->is('adminPanel/product/create') ? 'is-active' : '' }}">
             <a href="{{route('product.create')}}">محصولات</a></li>
+        <li class="item-li i-ads {{ request()->is('adminPanel/offer/create') ? 'is-active' : '' }}">
+            <a href="{{route('offer.create')}}">کد تخفیف</a></li>
         <li class="item-li i-banners {{ request()->is('adminPanel/slider/create') ? 'is-active' : '' }}">
             <a href="{{route('slider.create')}}">اسلایدر</a></li>
         <li class="item-li i-tickets {{ request()->is('adminPanel/propertyGroup/create') ? 'is-active' : '' }}">
@@ -30,7 +32,6 @@
         <li class="item-li i-articles @if(request()->routeIs('role.create','role.edit')) is-active @endif">
             <a href="{{route('role.create')}}">نقش ها</a></li>
         {{-- <li class="item-li i-slideshow"><a href="#">اسلایدشو</a></li> --}}
-        {{-- <li class="item-li i-ads"><a href="#">تبلیغات</a></li> --}}
         {{-- <li class="item-li i-comments"><a href="#"> نظرات</a></li> --}}
         {{-- <li class="item-li i-discounts"><a href="#">تخفیف ها</a></li> --}}
         {{-- <li class="item-li i-checkout__request "><a href="#">درخواست تسویه </a></li> --}}
