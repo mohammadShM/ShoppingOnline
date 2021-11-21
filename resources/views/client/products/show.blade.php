@@ -102,7 +102,7 @@
                                             </button>
                                         </div>
                                         <div>
-                                            {{--                                            @auth--}}
+                                            {{--@auth--}}
                                             <button id="like-for-show-blade-{{$product->id}}" type="button" class="wishlist"
                                                     onClick=likeProduct({{$product->id}})>
                                                 {{-- <i class="fa fa-heart @if(auth()->user() && $product->likes()--}}
@@ -111,7 +111,7 @@
                                                 <i class="fa fa-heart @if($product->is_liked)
                                                     like-for-show-blade @endif"></i> افزودن به علاقه مندی ها
                                             </button>
-                                            {{--                                            @endauth--}}
+                                            {{--@endauth--}}
                                             <br/>
                                             <button type="button" class="wishlist" onClick=""><i class="fa fa-exchange"></i>
                                                 مقایسه این محصول

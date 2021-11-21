@@ -152,7 +152,13 @@
                             <button type="button" data-toggle="dropdown" data-loading-text="بارگذاری ..."
                                     class="heading dropdown-toggle">
                                 <span class="cart-icon pull-left flip"></span>
-                                <span id="cart-total">2 آیتم - 132000 تومان</span></button>
+                                <span id="cart-total"><sapn id="total_items">@if (\App\Models\Cart::getSessionCart())
+                                            <b>{{\App\Models\Cart::totalItems()}}</b>
+                                        @else <b>0</b>
+                                        @endif</sapn> محصول - <span id="total_price">@if (\App\Models\Cart::getSessionCart())
+                                            <b>{{\App\Models\Cart::totalPrice()}}</b>
+                                        @else <b>0</b>
+                                        @endif</span> تومان</span></button>
                             <ul class="dropdown-menu">
                                 <li>
                                     <table class="table">

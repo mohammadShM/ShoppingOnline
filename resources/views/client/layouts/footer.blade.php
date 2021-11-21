@@ -175,15 +175,29 @@
 <script>
     // for cart ======================================================================
     function addToCart(productId) {
-        var quantity = $("#input-quantity").val();
+        let quantityValue = $('#input-quantity');
+        let quantity = 1;
+        if (quantityValue.length) {
+            quantity = quantityValue.val();
+        }
         $.ajax({
             type: "POST",
-            url: "/cart/store",
+            url: "/cart/" + productId,
             data: {
                 _token: "{{csrf_token()}}",
                 productId: productId,
                 quantity: quantity,
             },
+            /**
+             * @param data          Information about the object.
+             * @param data.cart   Information about the object's members.
+             * @param data.cart.total_items   Information about the object's members.
+             * @param data.cart.total_price   Information about the object's members.
+             */
+            success: function (data) {
+                $('#total_items').text(data.cart.total_items);
+                $('#total_price').text(data.cart.total_price);
+            }
         })
     }
 </script>

@@ -42,7 +42,7 @@ Route::prefix('')->name('client.')->group(function () {
     Route::post('register/verifyOtp/{user}', [RegisterController::class, 'verifyOtp'])->name('register.verifyOtp');
     Route::delete('logout', [RegisterController::class, 'logout'])->name('logout');
     // ============================================= cart =============================================
-    Route::post('cart', [CartController::class, 'store'])->name('cart.store');
+    Route::post('/cart/{product}', [CartController::class, 'store'])->name('cart.store');
 });
 
 // ============================================= admin =============================================

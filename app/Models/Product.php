@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Storage;
 /**
  * @method static paginate(int $int)
  * @method static create(array $array)
+ * @method static find(mixed $get)
  * @property mixed $image
  * @property mixed $id
  * @property mixed $category

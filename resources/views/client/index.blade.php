@@ -72,7 +72,9 @@
                                                 @endif
                                             </div>
                                             <div class="button-group">
-                                                <button class="btn-primary" type="button" onClick=""><span>افزودن به سبد</span>
+                                                <button class="btn-primary" type="button"
+                                                        onClick="addToCart({{$featuredProduct->id}});">
+                                                    <span>افزودن به سبد</span>
                                                 </button>
                                                 <div class="add-to-links">
                                                     <button id="like-for-show-blade-{{$featuredProduct->id}}"
@@ -1103,7 +1105,8 @@
                                                     class="fa fa-star-o fa-stack-2x"></i></span></div>
                                     </div>
                                     <div class="button-group">
-                                        <button class="btn-primary" type="button" onClick=""><span>افزودن به سبد</span></button>
+                                        <button class="btn-primary" type="button"
+                                                onClick="addToCart({{$product->id}})"><span>افزودن به سبد</span></button>
                                         <div class="add-to-links">
                                             <button id="like-for-show-blade-{{$product->id}}" type="button"
                                                     data-toggle="tooltip" title="افزودن به علاقه مندی"
