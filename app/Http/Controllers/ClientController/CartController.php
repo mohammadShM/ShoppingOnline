@@ -15,6 +15,11 @@ use Psr\Container\NotFoundExceptionInterface;
 class CartController extends Controller
 {
 
+    public function index(): void
+    {
+
+    }
+
     /**
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
@@ -25,6 +30,19 @@ class CartController extends Controller
         Cart::new($product, $request);
         return response([
             'msg' => 'success',
+            'cart' => Cart::getSessionCart(),
+        ], 200);
+    }
+
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    public function destroy(Product $product): ResponseFactory|Application|Response
+    {
+        Cart::remove($product);
+        return response([
+            'msg' => 'removed',
             'cart' => Cart::getSessionCart(),
         ], 200);
     }

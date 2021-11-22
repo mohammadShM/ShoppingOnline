@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\Storage;
  * @property mixed $image
  * @property mixed $id
  * @property mixed $category
+ * @property mixed $price
+ * @property mixed $discount_value
+ * @property mixed $has_discount
  */
 class Product extends Model
 {
@@ -31,6 +34,12 @@ class Product extends Model
     protected $guarded = ['id'];
 
     protected $dates = ['deleted_at'];
+
+    // for use method in response for use jquery and js
+    protected $appends = [
+        'price_with_discount',
+        'image_path',
+    ];
 
     public function category(): BelongsTo
     {
@@ -141,11 +150,11 @@ class Product extends Model
     /** @noinspection PhpUnused */
     public function getPriceWithDiscountAttribute()
     {
-        if (!$this->discount()->exists()) {
+        if (!$this->has_discount) {
             return $this->price;
         }
         // for set price with discount
-        return $this->price - $this->price * $this->discount->value / 100;
+        return $this->price - $this->price * $this->discount_value / 100;
     }
 
     // use in blade by casting = $product->has_discount ==================================
@@ -204,6 +213,14 @@ class Product extends Model
     public function getIsLikedAttribute(): bool
     {
         return $this->likes()->where('user_id', auth()->id())->exists();
+    }
+
+    // for set image in jquery cart  =====================================================
+
+    public function getImagePathAttribute()
+    {
+        // return asset(str_replace('public', '/storage', $this->image));
+        return str_replace('public', '/storage', $this->image);
     }
 
 }

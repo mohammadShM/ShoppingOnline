@@ -152,76 +152,15 @@
                             <button type="button" data-toggle="dropdown" data-loading-text="بارگذاری ..."
                                     class="heading dropdown-toggle">
                                 <span class="cart-icon pull-left flip"></span>
-                                <span id="cart-total"><sapn id="total_items">@if (\App\Models\Cart::getSessionCart())
+                                <span id="cart-total"><sapn id="total_items">@if (\App\Models\Cart::getItms())
                                             <b>{{\App\Models\Cart::totalItems()}}</b>
                                         @else <b>0</b>
-                                        @endif</sapn> محصول - <span id="total_price">@if (\App\Models\Cart::getSessionCart())
+                                        @endif</sapn> محصول - <span id="total_price">@if (\App\Models\Cart::getItms())
                                             <b>{{\App\Models\Cart::totalPrice()}}</b>
                                         @else <b>0</b>
-                                        @endif</span> تومان</span></button>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <table class="table">
-                                        <tbody>
-                                        <tr>
-                                            <td class="text-center"><a href="#"><img class="img-thumbnail"
-                                                                                     title="کفش راحتی مردانه"
-                                                                                     alt="کفش راحتی مردانه"
-                                                                                     src="{{asset('./client/image/product/sony_vaio_1-50x75.jpg')}}"></a>
-                                            </td>
-                                            <td class="text-left"><a href="#">کفش راحتی مردانه</a></td>
-                                            <td class="text-right">x 1</td>
-                                            <td class="text-right">32000 تومان</td>
-                                            <td class="text-center">
-                                                <button class="btn btn-danger btn-xs remove" title="حذف" onClick="" type="button">
-                                                    <i class="fa fa-times"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center"><a href="#"><img class="img-thumbnail"
-                                                                                     title="تبلت ایسر" alt="تبلت ایسر"
-                                                                                     src="{{asset('./client/image/product/samsung_tab_1-50x75.jpg')}}"></a>
-                                            </td>
-                                            <td class="text-left"><a href="#">تبلت ایسر</a></td>
-                                            <td class="text-right">x 1</td>
-                                            <td class="text-right">98000 تومان</td>
-                                            <td class="text-center">
-                                                <button class="btn btn-danger btn-xs remove" title="حذف" onClick="" type="button">
-                                                    <i class="fa fa-times"></i></button>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </li>
-                                <li>
-                                    <div>
-                                        <table class="table table-bordered">
-                                            <tbody>
-                                            <tr>
-                                                <td class="text-right"><strong>جمع کل</strong></td>
-                                                <td class="text-right">132000 تومان</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-right"><strong>کسر هدیه</strong></td>
-                                                <td class="text-right">4000 تومان</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-right"><strong>مالیات</strong></td>
-                                                <td class="text-right">11880 تومان</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-right"><strong>قابل پرداخت</strong></td>
-                                                <td class="text-right">139880 تومان</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        <p class="checkout"><a href="#" class="btn btn-primary"><i
-                                                    class="fa fa-shopping-cart"></i> مشاهده سبد</a>&nbsp;&nbsp;&nbsp;<a
-                                                href="#" class="btn btn-primary"><i class="fa fa-share"></i> تسویه
-                                                حساب</a></p>
-                                    </div>
-                                </li>
-                            </ul>
+                                        @endif</span> تومان</span>
+                            </button>
+                            @include('client.layouts.mini-cart')
                         </div>
                     </div>
                     <!-- Mini Cart End-->

@@ -146,61 +146,8 @@
 <script type="text/javascript" src="{{asset('./client/js/jquery.dcjqaccordion.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('./client/js/owl.carousel.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('./client/js/custom.js')}}"></script>
-<!-- JS Part End-->
-<script>
-    // for like ======================================================================
-    function likeProduct(productId) {
-        $.ajax({
-            type: "POST",
-            url: "/likes/" + productId,
-            data: {
-                _token: "{{csrf_token()}}"
-            },
-            /**
-             * @param data          Information about the object.
-             * @param data.likes_count   Information about the object's members.
-             */
-            success: function (data) {
-                let icon = $('#like-for-show-blade-' + productId + '>.fa-heart');
-                if (icon.hasClass('like-for-show-blade')) {
-                    icon.removeClass('like-for-show-blade');
-                } else {
-                    icon.addClass('like-for-show-blade');
-                }
-                $('#likes_count').text(data.likes_count)
-            }
-        });
-    }
-</script>
-<script>
-    // for cart ======================================================================
-    function addToCart(productId) {
-        let quantityValue = $('#input-quantity');
-        let quantity = 1;
-        if (quantityValue.length) {
-            quantity = quantityValue.val();
-        }
-        $.ajax({
-            type: "POST",
-            url: "/cart/" + productId,
-            data: {
-                _token: "{{csrf_token()}}",
-                productId: productId,
-                quantity: quantity,
-            },
-            /**
-             * @param data          Information about the object.
-             * @param data.cart   Information about the object's members.
-             * @param data.cart.total_items   Information about the object's members.
-             * @param data.cart.total_price   Information about the object's members.
-             */
-            success: function (data) {
-                $('#total_items').text(data.cart.total_items);
-                $('#total_price').text(data.cart.total_price);
-            }
-        })
-    }
-</script>
+@include('client.layouts.js-custom-for-site')
 @yield('js-links')
+<!-- JS Part End-->
 </body>
 </html>
