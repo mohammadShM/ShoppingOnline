@@ -7,6 +7,8 @@ use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Psr\Container\ContainerExceptionInterface;
@@ -15,9 +17,17 @@ use Psr\Container\NotFoundExceptionInterface;
 class CartController extends Controller
 {
 
-    public function index(): void
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    public function index(): Application|View|Factory
     {
-
+        return view('client.cart.index', [
+            'items' => Cart::getItms(),
+            'total_items' => Cart::totalItems(),
+            'total_price' => Cart::totalPrice(),
+        ]);
     }
 
     /**

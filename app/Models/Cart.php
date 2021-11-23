@@ -77,7 +77,7 @@ class Cart
                 }
             }
         }
-        return number_format($totalPrice);
+        return $totalPrice;
     }
 
     /**
@@ -116,6 +116,11 @@ class Cart
         session()->put([
             self::$CART_SESSON => $cart,
         ]);
+    }
+
+    public static function removeAllItems(): void
+    {
+        session()->forget(self::$CART_SESSON);
     }
 
 }

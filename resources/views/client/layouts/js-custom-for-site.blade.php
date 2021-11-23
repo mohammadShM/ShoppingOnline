@@ -48,6 +48,8 @@
              * @param data.cart.total_price   Information about the object's members.
              */
             success: function (data) {
+                $('#product-quantity-'+productId).text('x'+quantity);
+                $('.cart-totalProce').text(data.cart.total_price);
                 $('#total_items').text(data.cart.total_items);
                 $('#total_price').text(data.cart.total_price);
                 let product = data.cart[productId]['product'];
@@ -63,7 +65,7 @@
                         + '</tr>'
                     );
                 }
-                $('.cart-total-price').text(data.cart.total_price + ' تومان ');
+                $('.cart-total-price').text(parseInt(data.cart.total_price).toLocaleString() + ' تومان ');
             }
         })
     }
@@ -82,11 +84,47 @@
              * @param data.cart   Information about the object's members.
              * @param data.cart.total_items   Information about the object's members.
              * @param data.cart.total_price   Information about the object's members.
+             * @param data.cart.product.id   Information about the object's members.
              */
             success: function (data) {
                 $('#total_items').text(data.cart.total_items);
                 $('#total_price').text(data.cart.total_price);
-                $('#cart_row' + {{$product->id}}).remove();
+                $('#cart_row' + productId).remove();
+                $('#cart-index' + productId).remove();
+                $('.cart-total-price').text(parseInt(data.cart.total_price).toLocaleString());
+            }
+        })
+    }
+
+    // for update quantity in product in cart ======================================================================
+    function updateCart(productId) {
+        let quantityValue = $('#input-quantity' + productId);
+        let quantity = 1;
+        if (quantityValue.length) {
+            quantity = quantityValue.val();
+        }
+        $.ajax({
+            type: "POST",
+            url: "/cart/" + productId,
+            data: {
+                _token: "{{csrf_token()}}",
+                productId: productId,
+                quantity: quantity,
+            },
+            /**
+             * @param data          Information about the object.
+             * @param data.cart   Information about the object's members.
+             * @param data.cart.total_items   Information about the object's members.
+             * @param data.cart.total_price   Information about the object's members.
+             */
+            success: function (data) {
+                $('#total_items').text(data.cart.total_items);
+                $('#total_price').text(data.cart.total_price);
+                let product = data.cart[productId]['product'];
+                let productQty = data.cart[productId]['quantity'];
+                $('.cart-total-price').text(parseInt(data.cart.total_price).toLocaleString() + ' تومان ');
+                $('#totals-price-' + productId).text(parseInt(product.price_with_discount * productQty).toLocaleString());
+                $('#product-quantity-' + productId).text('x' + productQty);
             }
         })
     }

@@ -194,6 +194,14 @@ class Product extends Model
         if (request()->routeIs('client.likes.wishlist.index')) {
             return 'slug';
         }
+        // for order page (check out for cart)
+        if (request()->routeIs('client.orders.create')) {
+            return 'slug';
+        }
+        // for show all cart
+        if (request()->routeIs('client.cart.index')) {
+            return 'slug';
+        }
         // در روت ها پارامتر ست شده را بررسی می کند و اگر روتی product به عنوان پارامتر ست شده باشد آن روت را
         // در متغیر ما می ریزد مثل productDetails/{product}
         // که prouduct همان پارامتر پروداکت هست که ست شده
@@ -217,6 +225,7 @@ class Product extends Model
 
     // for set image in jquery cart  =====================================================
 
+    /** @noinspection PhpUnused */
     public function getImagePathAttribute()
     {
         // return asset(str_replace('public', '/storage', $this->image));
