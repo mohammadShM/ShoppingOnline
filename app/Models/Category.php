@@ -38,7 +38,6 @@ class Category extends Model
     }
 
     /** @noinspection PhpUnused
-     * @noinspection UnknownInspectionInspection
      */
     public function getAllSubCategoryProducts()
     {
@@ -49,7 +48,7 @@ class Category extends Model
         // get product by parent category and sub category
         return Product::query()->whereIn('category_id', $childrenIds)
             ->orWhere('category_id', $parentIds)
-            ->get();
+            ->paginate(16);
     }
 
     public function propertyGroups()

@@ -27,7 +27,7 @@
                                                 کنید</label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control" id="input-coupon" name="offer_code"
-                                                       placeholder="کد تخفیف خود را در اینجا وارد کنید" value="" >
+                                                       placeholder="کد تخفیف خود را در اینجا وارد کنید" value="">
                                                 <span class="input-group-btn">
                           <input type="button" class="btn btn-primary" data-loading-text="بارگذاری ..." id="button-coupon"
                                  value="اعمال کوپن">
@@ -102,7 +102,7 @@
                                                     <tfoot>
                                                     <tr>
                                                         <td class="text-right" colspan="4"><strong>جمع کل:</strong></td>
-                                                        <td class="text-center cart-totalPrice"  colspan="2">
+                                                        <td class="text-center cart-totalPrice" colspan="2">
                                                             <b>{{number_format($total_price)}} تومان</b>
                                                         </td>
                                                     </tr>
@@ -124,6 +124,12 @@
                                             <h4 class="panel-title"><i class="fa fa-pencil"></i>افزودن آدرس</h4>
                                         </div>
                                         <div class="panel-body">
+                                            @if ($errors->any())
+                                                <div style="background-color:#6db19b;padding: 10px;box-sizing: border-box;
+                                                        box-shadow: 1px 1px 1px rgba(0,0,0,0.3);">
+                                                    @include('admin.layouts.errors')
+                                                </div>
+                                            @endif
                                             <label for="address"></label>
                                             <textarea rows="4" class="form-control" id="address" style="resize: none;"
                                                       name="address"></textarea>

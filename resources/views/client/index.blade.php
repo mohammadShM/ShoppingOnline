@@ -754,7 +754,8 @@
                                                     title="سامسونگ گلکسی s7" class="img-responsive"/></a></div>
                                         <div class="caption">
                                             <h4><a href="#">سامسونگ گلکسی s7</a></h4>
-                                            <p class="price"><span class="price-new">62000 تومان</span> <span class="price-old">122000 تومان</span>
+                                            <p class="price"><span class="price-new">62000 تومان</span>
+                                                <span class="price-old">122000 تومان</span>
                                                 <span class="saving">-50%</span></p>
                                         </div>
                                         <div class="button-group">
@@ -1071,7 +1072,8 @@
 
                     <!--======================= دسته ها محصولات Slider Start   ======================= -->
                     @foreach ($categories as $parentCategory)
-                        <h3 class="subtitle"> {{$parentCategory->title_fa}} <a class="viewall" href="#">نمایش همه</a></h3>
+                        <h3 class="subtitle"> {{$parentCategory->title_fa}}
+                            <a class="viewall" href="{{route('client.category.index',$parentCategory)}}">نمایش همه</a></h3>
                         <div class="owl-carousel latest_category_carousel">
                             @forelse ($parentCategory->getAllSubCategoryProducts() as $product)
                                 <div class="product-thumb">

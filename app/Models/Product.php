@@ -202,6 +202,10 @@ class Product extends Model
         if (request()->routeIs('client.cart.index')) {
             return 'slug';
         }
+        // for products in category and ChildCategory
+        if (request()->routeIs('client.category.index','client.category.getChild')) {
+            return 'slug';
+        }
         // در روت ها پارامتر ست شده را بررسی می کند و اگر روتی product به عنوان پارامتر ست شده باشد آن روت را
         // در متغیر ما می ریزد مثل productDetails/{product}
         // که prouduct همان پارامتر پروداکت هست که ست شده

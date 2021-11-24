@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController\BrandController;
-use App\Http\Controllers\AdminController\CategoryController;
+use App\Http\Controllers\AdminController\CategoryController as AdminCategoryController;
 use App\Http\Controllers\AdminController\CommentController as AdminCommentController;
 use App\Http\Controllers\AdminController\DiscountController;
 use App\Http\Controllers\AdminController\FeaturedCategoryController;
@@ -16,6 +16,7 @@ use App\Http\Controllers\AdminController\RoleController;
 use App\Http\Controllers\AdminController\SliderController;
 use App\Http\Controllers\AdminController\UserController;
 use App\Http\Controllers\ClientController\CartController;
+use App\Http\Controllers\ClientController\CategoryController as ClientCategoryController;
 use App\Http\Controllers\ClientController\CommentController as ClientCommentController;
 use App\Http\Controllers\ClientController\indexController;
 use App\Http\Controllers\ClientController\LikeController;
@@ -49,6 +50,13 @@ Route::prefix('')->name('client.')->group(function () {
     // ============================================= order (check out for cart) =============================================
     Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
     Route::post('/orders/store', [OrderController::class, 'store'])->name('orders.store');
+    // for payment callback
+    Route::get('orders/payment/callback', [OrderController::class, 'callback'])->name('orders.callback');
+    Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+    // ============================================= category =============================================
+    Route::get('/category/{category}', [ClientCategoryController::class, 'index'])->name('category.index');
+    Route::get('/getChildCategory/{childrenCategory}',
+        [ClientCategoryController::class, 'getChildren'])->name('category.getChild');
 });
 
 // ============================================= admin =============================================
@@ -57,7 +65,7 @@ Route::prefix('adminPanel')->middleware([
 // 'auth', //  for check user login in site
 ])->group(function () {
     Route::resource('/', PanelController::class);
-    Route::resource('category', CategoryController::class);
+    Route::resource('category', AdminCategoryController::class);
     Route::resource('brand', BrandController::class);
     // ============================================= product =============================================
     Route::resource('product', ProductControllerAdmin::class);

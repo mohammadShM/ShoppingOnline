@@ -32,21 +32,26 @@
                 <span class="submore"></span>
                 <div class="dropdown-menu" style="margin-left: -1047.87px; display: none;">
                     @foreach ($categories as $category)
-                        <div class="column col-lg-2 col-md-3"><a href="#">{{$category->title_fa}}</a>
+                        <div class="column col-lg-2 col-md-3">
+                            <a href="{{route('client.category.index',$category)}}">{{$category->title_fa}}</a>
                             @if ($category->children->count() > 0)
                                 <span class="submore"></span>
                             @endif
                             <div>
                                 <ul>
                                     @foreach ($category->children as $childrenCategory)
-                                        <li><a href="#">{{$childrenCategory->title_fa}}
+                                        <li><a href="{{route('client.category.getChild',
+                                                ['childrenCategory'=>$childrenCategory])}}">
+                                                {{$childrenCategory->title_fa}}
                                                 @if ($childrenCategory->children->count() > 0)<span>›</span> @endif</a>
                                             @if ($childrenCategory->children->count() > 0)
                                                 <span class="submore"></span>
                                                 <div class="dropdown-menu" style="display: none;">
                                                     <ul>
                                                         @foreach ($childrenCategory->children as $subMenu)
-                                                            <li><a href="#">{{$subMenu->title_fa}}</a></li>
+                                                            <li><a href="{{route('client.category.getChild',
+                                                                ['childrenCategory'=>$subMenu])}}">
+                                                                    {{$subMenu->title_fa}}</a></li>
                                                         @endforeach
                                                     </ul>
                                                 </div>
