@@ -5,15 +5,16 @@
             <!-- Breadcrumb Start-->
             <ul class="breadcrumb">
                 <li><a href="/"><i class="fa fa-home"></i></a></li>
-                <li><a href="">حساب کاربری</a></li>
-                <li><a href="">تایید حساب کاربری</a></li>
+                <li><a href="{{route('client.login.create')}}">حساب کاربری</a></li>
+                <li><a href="#">تایید حساب کاربری</a></li>
             </ul>
             <!-- Breadcrumb End-->
             <div class="row">
                 <!--Middle Part Start-->
                 <div class="col-sm-12" id="content">
                     <h1 class="title">ثبت نام حساب کاربری</h1>
-                    <p>اگر قبلا حساب کاربریتان را ایجاد کرد اید جهت ورود به <a href="">صفحه لاگین</a> مراجعه کنید.</p>
+                    <p>اگر قبلا حساب کاربریتان را ایجاد کرد اید جهت ورود به <a href="{{route('client.login.create')}}">
+                            صفحه لاگین</a> مراجعه کنید.</p>
                     <form class="form-horizontal" method="post" action="{{route('client.register.verifyOtp',$user)}}">
                         @csrf
                         <fieldset id="account">

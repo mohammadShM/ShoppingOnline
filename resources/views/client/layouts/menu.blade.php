@@ -140,7 +140,17 @@
                     </ul>
                 </div>
             </li>
-            <li class="custom-link-right"><a href="#" target="_blank"> همین حالا بخرید!</a></li>
+            @auth
+                <li class="custom-link-right">
+                    <a href="{{route('client.myProfile.edit')}}" target="_blank"
+                       style="height:40px;text-align:center;line-height:40px;">
+                        {{auth()->user()->name??"Dear user"}}
+                        <img src="{{auth()->user()->avatar}}" alt="user-avatar" class="img-circle" width="30" height="30"/>
+                    </a>
+                </li>
+            @else
+                <li class="custom-link-right">Guest user</li>
+            @endauth
         </ul>
     </div>
 </div>

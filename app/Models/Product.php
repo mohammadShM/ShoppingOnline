@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Storage;
  * @method static paginate(int $int)
  * @method static create(array $array)
  * @method static find(mixed $get)
+ * @method static where(string $string, string $string1, array|string|string[] $value)
+ * @method static orderBy(string $string, string $string1)
  * @property mixed $image
  * @property mixed $id
  * @property mixed $category
@@ -181,42 +183,49 @@ class Product extends Model
     /** @noinspection NullPointerExceptionInspection */
     public function getRouteKeyName(): string
     {
-        // for all admin panel pages
-        if (request()->route()->getPrefix() === '/adminPanel') {
-            return 'slug';
-        }
-        // for home page
-        if (request()->routeIs('client.index')) {
-            return 'slug';
-        }
-
-        // for wishlist page
-        if (request()->routeIs('client.likes.wishlist.index')) {
-            return 'slug';
-        }
-        // for order page (check out for cart)
-        if (request()->routeIs('client.orders.create')) {
-            return 'slug';
-        }
-        // for show all cart
-        if (request()->routeIs('client.cart.index')) {
-            return 'slug';
-        }
-        // for products in category and ChildCategory
-        if (request()->routeIs('client.category.index','client.category.getChild')) {
-            return 'slug';
-        }
+//        // for all admin panel pages
+//        if (request()->route()->getPrefix() === '/adminPanel') {
+//            return 'slug';
+//        }
+//        // for home page
+//        if (request()->routeIs('client.index')) {
+//            return 'slug';
+//        }
+//
+//        // for wishlist page
+//        if (request()->routeIs('client.likes.wishlist.index')) {
+//            return 'slug';
+//        }
+//        // for order page (check out for cart)
+//        if (request()->routeIs('client.orders.create')) {
+//            return 'slug';
+//        }
+//        // for show all cart
+//        if (request()->routeIs('client.cart.index')) {
+//            return 'slug';
+//        }
+//        // for products in category and ChildCategory
+//        if (request()->routeIs('client.category.index','client.category.getChild')) {
+//            return 'slug';
+//        }
         // در روت ها پارامتر ست شده را بررسی می کند و اگر روتی product به عنوان پارامتر ست شده باشد آن روت را
         // در متغیر ما می ریزد مثل productDetails/{product}
         // که prouduct همان پارامتر پروداکت هست که ست شده
-        $identifier = Route::current()->parameters()['product'];
+//        $identifier = Route::current()->parameters()['product'];
         // بررسی می کند اگر پارامتر پروداکت ما به صورت عددی نبود یعنی مثل روت نمایش محصولات به صورت slug بود پس عدد نیست
         // پس خروجی کلید ما اسلاگ است در غیر این صورت مثل روت like که در پارامتر پروداکت ما Id محصول را ارسال می کنیم
         // پس کلید ما آی دی است
-        if (!ctype_digit($identifier)) {
-            return 'slug';
+//        if (!ctype_digit($identifier)) {
+//            return 'slug';
+//        }
+//        return 'id';
+        if (request()->routeIs([
+            'likes.wishList.index', 'client.likes.store', 'client.likes.destroy',
+            'client.cart.index', 'client.cart.destroy', 'client.cart.store'
+        ])) {
+            return 'id';
         }
-        return 'id';
+        return 'slug';
     }
 
     // for liked product And use Eloquent: Mutators & Casting in nlade use ==== is_liked

@@ -48,7 +48,7 @@
              * @param data.cart.total_price   Information about the object's members.
              */
             success: function (data) {
-                $('#product-quantity-'+productId).text('x'+quantity);
+                $('#product-quantity-' + productId).text('x' + quantity);
                 $('.cart-totalProce').text(data.cart.total_price);
                 $('#total_items').text(data.cart.total_items);
                 $('#total_price').text(data.cart.total_price);
@@ -128,4 +128,42 @@
             }
         })
     }
+
+    // for search in header for products ======================================================================
+    function fetchCustomerData(value = '') {
+        $.ajax({
+            url: "/product/search",
+            method: "POST",
+            dataType: 'json',
+            data: {
+                value: value,
+                _token: "{{csrf_token()}}",
+            },
+            /**
+             * @param data          Information about the object.
+             * @param data.table_data   Information about the object's members.
+             * @param data.total_products   Information about the object's members.
+             */
+            success: function (data) {
+                console.log(data.table_data.length)
+                if(data.table_data.length > 0){
+                    $('.list-group-item-action').css('display', 'inline-block');
+                    $('div.table-responsive-action').css('display', 'inline-block');
+                    $('#total_products').text(data.total_products);
+                    $('.tbody').html(data.table_data);
+                }else {
+                    $('.list-group-item-action').css('display', 'none');
+                    $('div.table-responsive-action').css('display', 'none');
+                    $('.tbody').html('');
+                    $('.tbody').empty();
+                }
+            }
+        });
+    }
+
+    // for click id input search in header click ======================================================================
+    $('#filter_search').on('keyup', function (e) {
+        let query = $(this).val();
+        fetchCustomerData(query);
+    });
 </script>

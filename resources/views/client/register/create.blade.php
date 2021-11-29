@@ -8,15 +8,16 @@
             <!-- Breadcrumb Start-->
             <ul class="breadcrumb">
                 <li><a href="/"><i class="fa fa-home"></i></a></li>
-                <li><a href="">حساب کاربری</a></li>
-                <li><a href="">ثبت نام</a></li>
+                <li><a href="{{route('client.login.create')}}">حساب کاربری</a></li>
+                <li><a href="{{route('client.register.create')}}">ثبت نام</a></li>
             </ul>
             <!-- Breadcrumb End-->
             <div class="row">
                 <!--Middle Part Start-->
                 <div class="col-sm-12" id="content">
                     <h1 class="title">ثبت نام حساب کاربری</h1>
-                    <p>اگر قبلا حساب کاربریتان را ایجاد کرد اید جهت ورود به <a href="">صفحه لاگین</a> مراجعه کنید.</p>
+                    <p>اگر قبلا حساب کاربریتان را ایجاد کرد اید جهت ورود به <a href="{{route('client.login.create')}}">
+                            صفحه لاگین</a> مراجعه کنید.</p>
                     <form class="form-horizontal" method="post" action="{{route('client.register.sendmail')}}">
                         @csrf
                         <fieldset id="account">
@@ -31,6 +32,8 @@
                             <div class="buttons">
                                 <div class="pull-right">
                                     <input type="submit" class="btn btn-primary" value="ارسال">
+                                    <a href="{{route('client.login.google')}}" class="btn btn-default fa fa-google">
+                                        <span style="padding-left: 5px;">ثبت نام با حساب گوگل</span></a>
                                 </div>
                             </div>
                         </fieldset>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html dir="rtl" lang="fa">
 <head>
+    @include('client.layouts.head_for_me_google_recaptcha')
     <meta charset="UTF-8"/>
     <meta name="format-detection" content="telephone=no"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -168,9 +169,18 @@
                     <div class="col-table-cell col-lg-3 col-md-3 col-sm-6 col-xs-12 inner">
                         <div id="search" class="input-group">
                             <!--suppress HtmlFormInputWithoutLabel -->
-                            <input id="filter_name" type="text" name="search" value="" placeholder="جستجو"
+                            <input id="filter_search" type="text" name="search" value="" placeholder="جستجو"
                                    class="form-control input-lg"/>
                             <button type="button" class="button-search"><i class="fa fa-search"></i></button>
+                            <table class="list-group-item list-group-item-action" style="display: none;">
+                                <tbody class="tbody">
+                                <!-- ========================= after search show data ========================= -->
+                                </tbody>
+                            </table>
+                            <div class="table-responsive table-responsive-action" style="display: none;">
+                                <h6 class="text-center" style="color:white;">تعداد محصول یافت شده :
+                                    <span id="total_products"></span></h6>
+                            </div>
                         </div>
                     </div>
                     <!-- جستجو End-->

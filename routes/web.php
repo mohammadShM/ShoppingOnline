@@ -20,8 +20,11 @@ use App\Http\Controllers\ClientController\CategoryController as ClientCategoryCo
 use App\Http\Controllers\ClientController\CommentController as ClientCommentController;
 use App\Http\Controllers\ClientController\indexController;
 use App\Http\Controllers\ClientController\LikeController;
+use App\Http\Controllers\ClientController\LoginController;
 use App\Http\Controllers\ClientController\OrderController;
 use App\Http\Controllers\ClientController\ProductController as ProductControllerClient;
+use App\Http\Controllers\ClientController\ProductSearchController;
+use App\Http\Controllers\ClientController\ProfileController;
 use App\Http\Controllers\ClientController\RegisterController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,11 +41,35 @@ Route::prefix('')->name('client.')->group(function () {
     Route::post('/likes/{product}', [LikeController::class, 'store'])->name('likes.store');
     Route::delete('/likes/{product}', [LikeController::class, 'destroy'])->name('likes.destroy');
     // ============================================= register =============================================
-    Route::get('register', [RegisterController::class, 'create'])->name('register.create');
-    Route::post('register/sendmail', [RegisterController::class, 'sendMail'])->name('register.sendmail');
-    Route::get('register/otp/{user}', [RegisterController::class, 'otp'])->name('register.otp');
-    Route::post('register/verifyOtp/{user}', [RegisterController::class, 'verifyOtp'])->name('register.verifyOtp');
-    Route::delete('logout', [RegisterController::class, 'logout'])->name('logout');
+    Route::middleware('guest')->group(function () {
+        Route::get('register', [RegisterController::class, 'create'])->name('register.create');
+        Route::post('register/sendmail', [RegisterController::class, 'sendMail'])->name('register.sendmail');
+        Route::get('register/otp/{user}', [RegisterController::class, 'otp'])->name('register.otp');
+        Route::post('register/verifyOtp/{user}', [RegisterController::class, 'verifyOtp'])->name('register.verifyOtp');
+        Route::delete('logout', [RegisterController::class, 'logout'])->name('logout');
+    });
+    Route::middleware('auth')->group(function () {
+        Route::get('/changeUserPassword/edit', [RegisterController::class, 'changeUserPassword_edit'])
+            ->name('changeUserPassword.edit');
+        Route::patch('/changeUserPassword/update', [RegisterController::class, 'changeUserPassword_update'])
+            ->name('changeUserPassword.update');
+    });
+    // ============================================= login =============================================
+    Route::middleware('guest')->group(function () {
+        Route::get('/login/create', [LoginController::class, 'create'])->name('login.create');
+        Route::post('/login/create', [LoginController::class, 'store'])->name('login.store');
+        Route::get('/login/google', [LoginController::class, 'redirectToProvider'])->name('login.google');
+        Route::get('/login/google/callback', [LoginController::class, 'handleProviderCallback']);
+    });
+    // ============================================= user profile =============================================
+    Route::middleware('auth')->group(function () {
+        Route::get('/myProfile', [ProfileController::class, 'edit'])->name('myProfile.edit');
+        Route::patch('/myProfile', [ProfileController::class, 'update'])->name('myProfile.update');
+        Route::get('/myProfile/changePassword/edit', [ProfileController::class, 'changePassword_edit'])
+            ->name('myProfile.changePassword.edit');
+        Route::patch('/myProfile/changePassword/update', [ProfileController::class, 'changePassword_update'])
+            ->name('myProfile.changePassword.update');
+    });
     // ============================================= cart =============================================
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/{product}', [CartController::class, 'store'])->name('cart.store');
@@ -57,12 +84,14 @@ Route::prefix('')->name('client.')->group(function () {
     Route::get('/category/{category}', [ClientCategoryController::class, 'index'])->name('category.index');
     Route::get('/getChildCategory/{childrenCategory}',
         [ClientCategoryController::class, 'getChildren'])->name('category.getChild');
+    // ============================================= products Search =============================================
+    Route::post('/product/search', [ProductSearchController::class, 'fetchData'])->name('products.search');
 });
 
 // ============================================= admin =============================================
 Route::prefix('adminPanel')->middleware([
 // CheckPermission::class . ':view-dashboard',
-// 'auth', //  for check user login in site
+    'auth', //  for check user login in site
 ])->group(function () {
     Route::resource('/', PanelController::class);
     Route::resource('category', AdminCategoryController::class);
